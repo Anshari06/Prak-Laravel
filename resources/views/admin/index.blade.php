@@ -55,10 +55,37 @@
                     <tbody>
                         @foreach ($users as $i => $user)
                             <tr>
-                                <td>{{ $i + 1 }}</td> //Number
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $i + 1 }}</td> {{-- Menampilkan nomor urut --}}
+                                <td>{{ $user->nama }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at ? $user->created_at->format('Y-m-d H:i') : '-' }}</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                                <a 
+                                                {{-- href="{{ route('.show', $barang->idbarang) }}" --}}
+                                                    class="btn btn-sm btn-info" title="Lihat">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a 
+                                                {{-- href="{{ route('.edit', $barang->idbarang) }}" --}}
+                                                    class="btn btn-sm btn-warning" title="Edit">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <form
+                                                    {{-- action="{{ route('.destroy', $barang->idbarang) }}" --}}
+                                                    method="POST" class="d-inline"
+                                                    onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-danger"
+                                                        title="Hapus">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+              
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
