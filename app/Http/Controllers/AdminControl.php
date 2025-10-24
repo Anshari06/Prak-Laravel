@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminControl extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        // Load users so the admin dashboard can display the users table
+        $users = User::all();
+        return view('admin.index', compact('users'));
     }
 
     public function manageUsers()
     {
-        // Logic for managing users
+        $users = User::all();
+        return view('admin.index', compact('users'));
     }
 }

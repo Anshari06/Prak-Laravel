@@ -22,14 +22,50 @@
     <x-sidebar></x-sidebar>
 
     {{-- Main Content --}}
-    <div class="flex-grow-1 p-4" style="overflow-y: auto;">
-        <h1>Admin Dashboard</h1>
-        <p>Welcome to the admin dashboard. Use the sidebar to navigate through different sections.
-        </p>
-    </div>
+    {{-- Konten utama --}}
+    <main class="flex-grow-1 p-4" style="overflow-y: auto;">
+        <div class="container-fluid">
 
-    <section>
-    </section>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Data Barang</h2>
+
+                {{-- <a href="{{ route('barang.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-2"></i>Tambah  --}}
+                </a>
+            </div>
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+            <div class="container">
+                <h1>Manage Users</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Created at</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $i => $user)
+                            <tr>
+                                <td>{{ $i + 1 }}</td> //Number
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->created_at ? $user->created_at->format('Y-m-d H:i') : '-' }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
