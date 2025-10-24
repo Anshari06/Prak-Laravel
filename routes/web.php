@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth_Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home_RSPH');
+    return view('welcome');
 });
 
 Route::get('/home', [home_controller::class, 'index'])->name('home_rsph');
