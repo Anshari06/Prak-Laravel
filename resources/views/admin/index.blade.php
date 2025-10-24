@@ -26,8 +26,10 @@
         <h1>Admin Dashboard</h1>
         <p>Welcome to the admin dashboard. Use the sidebar to navigate through different sections.
         </p>
-        
     </div>
+
+    <section>
+    </section>
 </body>
 
 </html>

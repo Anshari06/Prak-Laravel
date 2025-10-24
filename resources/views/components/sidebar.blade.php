@@ -23,7 +23,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <x-nav-link href="/" :active="request()->is('/')"
+            <x-nav-link href="/admin" :active="request()->is('admin')"
                 icn="bi bi-house-door me-2">Dashboard</x-nav-link>
         </li>
         <li>
