@@ -14,7 +14,5 @@ Route::get('/login', [Auth_Controller::class, 'login'])->name('login');
 
 Route::get('/struktur', [home_controller::class, 'struktur'])->name('struktur');
 
-Route::get('/layanan', [home_controller::class, 'layanan'])->name('layanan');
-
 // Admin Route
 Route::get('/manage-user', [App\Http\Controllers\AdminControl::class, 'index'])->name('admin.index');
