@@ -48,4 +48,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function Pemilik()
+    {
+        return $this->hasOne(Pemilik::class, 'iduser', 'iduser');
+    }
 }
