@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Jenis_Hewan;
 
-class Jenis_hewan_Controller extends Controller
+class JenisHewanController extends Controller
 {
     public function index()
     {
