@@ -27,7 +27,7 @@
         <div class="container-fluid">
 
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Data Barang</h2>
+                <h2>Data User</h2>
 
                 {{-- <a href="{{ route('barang.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-2"></i>Tambah  --}}
@@ -60,16 +60,16 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at ? $user->created_at->format('Y-m-d H:i') : '-' }}</td>
                                 <td>
-                                    <div class="btn-group" role="group">
+                                    <div class=" d-grid gap-2 d-md-block">
                                                 <a 
                                                 {{-- href="{{ route('.show', $barang->idbarang) }}" --}}
-                                                    class="btn btn-sm btn-info" title="Lihat">
-                                                    <i class="bi bi-eye"></i>
+                                                    class="btn btn-sm btn-info p-1 px-2" title="Lihat">
+                                                    <i class="bi bi-eye fs-6"></i>
                                                 </a>
                                                 <a 
                                                 {{-- href="{{ route('.edit', $barang->idbarang) }}" --}}
-                                                    class="btn btn-sm btn-warning" title="Edit">
-                                                    <i class="bi bi-pencil"></i>
+                                                    class="btn btn-sm btn-warning p-1 px-2" title="Edit">
+                                                    <i class="bi bi-pencil fs-6"></i>
                                                 </a>
                                                 <form
                                                     {{-- action="{{ route('.destroy', $barang->idbarang) }}" --}}
@@ -78,9 +78,9 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
-                                                        class="btn btn-sm btn-danger"
+                                                        class="btn btn-sm btn-danger p-1 px-2"
                                                         title="Hapus">
-                                                        <i class="bi bi-trash"></i>
+                                                        <i class="bi bi-trash fs-6"></i>
                                                     </button>
                                                 </form>
                                             </div>

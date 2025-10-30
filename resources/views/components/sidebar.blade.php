@@ -17,21 +17,21 @@
         <a class="navbar-brand gap-3 text-white fs-5 fw-bold" href="#">
             <img src="{{ asset('img/logo-uner.png') }}" alt="Unair" width="50"
                 class="d-inline-block align-text-center ">
-            Rumah Sakit Unair
+            Proyek PBD Cuy
         </a>
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <x-nav-link href="/manage-user" :active="request()->is('admin')"
-                icn="bi bi-people me-2">Manage User</x-nav-link>
+            <x-nav-link href="/" :active="request()->is('/')"
+                icn="bi bi-house-door me-2">Dashboard</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage_user" :active="request()->is('manage_user')" icn="bi bi-kanban me-2">
+            <x-nav-link href="/manage_user" :active="request()->is('manage_user')" icn="bi bi-people me-2">
                 Manage User</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bi bi-kanban me-2">
+            <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bi bi-box-seam me-2">
                 Manage Barang</x-nav-link>
         </li>
         <li class="nav-item">

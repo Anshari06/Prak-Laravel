@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Jenis_Hewan;
 
 class AdminControl extends Controller
 {
@@ -18,6 +17,6 @@ class AdminControl extends Controller
     public function manageUsers()
     {
         $users = User::all();
-        return view('admin.index', compact('users'));
+        return view('admin.manage_user', compact('users'));
     }
 }
