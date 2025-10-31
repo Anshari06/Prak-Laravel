@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Jenis_Hewan;
 use App\Models\Kat_Klinis;
+use App\Models\kat_tindakan;
 use App\Models\Pet;
 // use App\Models\ras_hewan;
 use App\Models\Pemilik;
@@ -63,6 +64,11 @@ class AdminControl extends Controller
         return view('admin.category.manage_category', compact('Categories'));
     }
 
-    
+    public function manageKat_tindakan()
+    {
+        $Categories = kat_tindakan::all();
+        return view('admin.category.manage_category', compact('Categories'));
+    }
+
     
 }
