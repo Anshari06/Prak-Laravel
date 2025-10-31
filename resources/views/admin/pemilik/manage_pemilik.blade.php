@@ -57,16 +57,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        // Support either $pemiliks (preferred) or fallback to $users if the controller passes users
-                                        $collection = $pemiliks ?? ($users ?? collect());
-                                    @endphp
-                                    @foreach ($collection as $i => $pemilik)
+                                    @foreach ($Pemiliks as $i => $pemilik)
                                         <tr>
                                             <td>{{ $i + 1 }}</td>
                                             <td>{{ $pemilik->idpemilik ?? ($pemilik->iduser ?? '-') }}
                                             </td>
-                                            <td>{{ $pemilik->user->nama ?? ($pemilik->nama ?? ($pemilik->name ?? '-')) }}
+                                            <td>{{ $pemilik->user->nama ?? '-' }}
                                             </td>
                                             <td>{{ $pemilik->no_wa ?? '-' }}</td>
                                             <td>{{ $pemilik->alamat ?? '-' }}</td>

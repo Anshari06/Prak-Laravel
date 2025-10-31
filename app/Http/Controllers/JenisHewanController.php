@@ -10,6 +10,7 @@ class JenisHewanController extends Controller
     public function index()
     {
         $jenisHewans = Jenis_Hewan::all();
-        return view('admin.jenis_hewan.index');
+        return view('admin.jenis_hewan.index', compact('jenisHewans'));
     }
 }
+
