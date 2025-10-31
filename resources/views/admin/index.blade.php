@@ -7,9 +7,11 @@
         rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
-    <!-- Bootstrap Icons -->
+    <!-- Bootstrap Icons && third party icons -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
     <title>Dashboard</title>
 </head>
 
@@ -50,9 +52,9 @@
                         <div class="col-6 col-md-3">
                             <div class="card shadow-sm">
                                 <div class="card-body d-flex align-items-center">
-                                    <i class="bi bi-paw fs-1 text-success me-3"></i>
+                                    <i class="fa-solid fa-paw fs-1 text-primary me-3"></i>
                                     <div>
-                                        <div class="text-muted small">Pet Ready</div>
+                                        <div class="text-muted small">Pet Terdaftar</div>
                                         <div class="fs-3 fw-bold">{{ $jenisCount ?? '—' }}</div>
                                     </div>
                                 </div>
