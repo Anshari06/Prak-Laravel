@@ -22,76 +22,80 @@
     <x-sidebar></x-sidebar>
 
     {{-- Main Content --}}
-    {{-- Konten utama --}}
-    <main class="flex-grow-1 p-4" style="overflow-y: auto;">
-        <div class="container-fluid">
+    <main class="flex-grow-1 d-flex flex-column" style="height: 100vh; overflow: auto;">
+        {{-- Header Fixed --}}
+        <x-header>Manage Users</x-header>
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>Data User</h2>
+        <div class="flex-grow-1">
+            <div class="container-fluid p-3">
+                <h2 class="mt-0 mb-2">Welcome</h2>
+                <p class="mb-3">Your data is right here</p>
 
-                {{-- <a href="{{ route('barang.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus-circle me-2"></i>Tambah  --}}
-                </a>
-            </div>
+                {{-- for alert --}}
+                {{-- @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif --}}
 
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div class="container-fluid p3">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <strong>Data Users</strong>
+                        </div>
+                        <div class=" table-responsive">
+                            <table class="table table-striped-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="70px">Number</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($users as $i => $user)
+                                        <tr>
+                                            <td>{{ $i + 1 }}</td> {{-- Menampilkan nomor urut --}}
+                                            <td>{{ $user->nama }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->nama_role }}</td>
+                                            <td>
+                                                <div class=" d-grid gap-2 d-md-block">
+                                                    <a {{-- href="{{ route('.show', $barang->idbarang) }}" --}}
+                                                        class="btn btn-sm btn-info p-1 px-2"
+                                                        title="Lihat">
+                                                        <i class="bi bi-eye fs-6"></i>
+                                                    </a>
+                                                    <a {{-- href="{{ route('.edit', $barang->idbarang) }}" --}}
+                                                        class="btn btn-sm btn-warning p-1 px-2"
+                                                        title="Edit">
+                                                        <i class="bi bi-pencil fs-6"></i>
+                                                    </a>
+                                                    <form {{-- action="{{ route('.destroy', $barang->idbarang) }}" --}} method="POST"
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger p-1 px-2"
+                                                            title="Hapus">
+                                                            <i class="bi bi-trash fs-6"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            @endif
-            <div class="container">
-                <h1>Manage Users</h1>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Number</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Created at</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $i => $user)
-                            <tr>
-                                <td>{{ $i + 1 }}</td> {{-- Menampilkan nomor urut --}}
-                                <td>{{ $user->nama }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at ? $user->created_at->format('Y-m-d H:i') : '-' }}</td>
-                                <td>
-                                    <div class=" d-grid gap-2 d-md-block">
-                                                <a 
-                                                {{-- href="{{ route('.show', $barang->idbarang) }}" --}}
-                                                    class="btn btn-sm btn-info p-1 px-2" title="Lihat">
-                                                    <i class="bi bi-eye fs-6"></i>
-                                                </a>
-                                                <a 
-                                                {{-- href="{{ route('.edit', $barang->idbarang) }}" --}}
-                                                    class="btn btn-sm btn-warning p-1 px-2" title="Edit">
-                                                    <i class="bi bi-pencil fs-6"></i>
-                                                </a>
-                                                <form
-                                                    {{-- action="{{ route('.destroy', $barang->idbarang) }}" --}}
-                                                    method="POST" class="d-inline"
-                                                    onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="btn btn-sm btn-danger p-1 px-2"
-                                                        title="Hapus">
-                                                        <i class="bi bi-trash fs-6"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-              
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
-        </div>
     </main>
 </body>
 

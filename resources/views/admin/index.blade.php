@@ -88,7 +88,7 @@
                             <table class="table table-sm table-hover mb-0">
                                 <thead class="table-light">
                                     <tr>
-                                        <th style="width:60px">#</th>
+                                        <th style="width:60px">Number</th>
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Email</th>
@@ -102,7 +102,6 @@
                                             <td>{{ $user->iduser ?? '-' }}</td>
                                             <td>{{ $user->nama ?? '-' }}</td>
                                             <td>{{ $user->email ?? '-' }}</td>
-                                            </td>
                                             <td class="text-end">
                                                 {{-- Example actions: view / edit (implement routes later) --}}
                                                 <a href="#"
