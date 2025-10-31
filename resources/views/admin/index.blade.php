@@ -10,9 +10,8 @@
     <!-- Bootstrap Icons && third party icons -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        crossorigin="anonymous" />
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css' rel='stylesheet'>
     <title>Dashboard</title>
 </head>
 
@@ -38,6 +37,7 @@
                 {{-- Statistik cards (akan menampilkan jumlah dari DB) --}}
                 <div class="container-fluid mt-3">
                     <div class="row g-3">
+                        
                         <div class="col-6 col-md-3">
                             <div class="card shadow-sm">
                                 <div class="card-body d-flex align-items-center">
@@ -53,7 +53,7 @@
                         <div class="col-6 col-md-3">
                             <div class="card shadow-sm">
                                 <div class="card-body d-flex align-items-center">
-                                    <i class="fa-solid fa-paw fs-1 text-primary me-3"></i>
+                                    <i class='bx bx-paw-print fs-1 me-3 text-primary'></i>
                                     <div>
                                         <div class="text-muted small">Pet Terdaftar</div>
                                         <div class="fs-3 fw-bold">{{ $petCount ?? '—' }}</div>
@@ -62,17 +62,17 @@
                             </div>
                         </div>
 
-                        {{-- <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-3">
                             <div class="card shadow-sm">
                                 <div class="card-body d-flex align-items-center">
-                                    <i class="bi bi-building-fill fs-1 text-warning me-3"></i>
+                                    <i class="bi bi-person fs-1 text-primary me-3"></i>
                                     <div>
-                                        <div class="text-muted small">Vendor Aktif</div>
-                                        <div class="fs-3 fw-bold">{{ $vendorCount ?? '—' }}</div>
+                                        <div class="text-muted small">Total Pemilik</div>
+                                        <div class="fs-3 fw-bold">{{ $pemilikCount ?? '—' }}</div>
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                     </div>
                 </div>
