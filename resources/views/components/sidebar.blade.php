@@ -33,6 +33,10 @@
                 Manage User</x-nav-link>
         </li>
         <li>
+            <x-nav-link href="/manage-ppemilik" :active="request()->is('manage-pemilik')" icn="bi bi-person me-2">
+                Manage Pemilik</x-nav-link>
+        </li>
+        <li>
             <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bi bi-box-seam me-2">
                 Manage Jenis Hewan</x-nav-link>
         </li>

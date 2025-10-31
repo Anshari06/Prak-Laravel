@@ -24,7 +24,7 @@
     {{-- Main Content --}}
     <main class="flex-grow-1 d-flex flex-column" style="height: 100vh; overflow: auto;">
         {{-- Header Fixed --}}
-        <x-header>Manage Users</x-header>
+        <x-header>Manage Pemilik</x-header>
 
         <div class="flex-grow-1">
             <div class="container-fluid p-3">
@@ -42,41 +42,48 @@
                 <div class="container-fluid p3">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <strong>Data Users</strong>
+                            <strong>Data Pemilik</strong>
                         </div>
-                        <div class=" table-responsive">
-                            <table class="table table-striped-hover mb-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0">
                                 <thead class="table-light">
                                     <tr>
-                                        <th scope="70px">Number</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
+                                        <th style="width:70px">#</th>
+                                        <th>ID Pemilik</th>
+                                        <th>Nama Pemilik</th>
+                                        <th>No. WA</th>
+                                        <th>Alamat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $i => $user)
+                                    @php
+                                        // Support either $pemiliks (preferred) or fallback to $users if the controller passes users
+                                        $collection = $pemiliks ?? ($users ?? collect());
+                                    @endphp
+                                    @foreach ($collection as $i => $pemilik)
                                         <tr>
-                                            <td>{{ $i + 1 }}</td> {{-- Menampilkan nomor urut --}}
-                                            <td>{{ $user->nama }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->nama_role ?? 'belum tersambung'}}</td>
+                                            <td>{{ $i + 1 }}</td>
+                                            <td>{{ $pemilik->idpemilik ?? ($pemilik->iduser ?? '-') }}
+                                            </td>
+                                            <td>{{ $pemilik->user->nama ?? ($pemilik->nama ?? ($pemilik->name ?? '-')) }}
+                                            </td>
+                                            <td>{{ $pemilik->no_wa ?? '-' }}</td>
+                                            <td>{{ $pemilik->alamat ?? '-' }}</td>
                                             <td>
-                                                <div class=" d-grid gap-2 d-md-block">
-                                                    <a {{-- href="{{ route('.show', $barang->idbarang) }}" --}}
+                                                <div class="d-grid gap-2 d-md-block">
+                                                    <a href="#"
                                                         class="btn btn-sm btn-info p-1 px-2"
                                                         title="Lihat">
                                                         <i class="bi bi-eye fs-6"></i>
                                                     </a>
-                                                    <a {{-- href="{{ route('.edit', $barang->idbarang) }}" --}}
+                                                    <a href="#"
                                                         class="btn btn-sm btn-warning p-1 px-2"
                                                         title="Edit">
                                                         <i class="bi bi-pencil fs-6"></i>
                                                     </a>
-                                                    <form {{-- action="{{ route('.destroy', $barang->idbarang) }}" --}} method="POST"
-                                                        class="d-inline"
-                                                        onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
+                                                    <form method="POST" class="d-inline"
+                                                        onsubmit="return confirm('Yakin ingin menghapus pemilik ini?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
@@ -86,7 +93,6 @@
                                                         </button>
                                                     </form>
                                                 </div>
-
                                             </td>
                                         </tr>
                                     @endforeach
