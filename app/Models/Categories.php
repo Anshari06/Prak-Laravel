@@ -12,4 +12,9 @@ class Categories extends Model
     protected $fillable = [
         'nama_kategori',
     ];
+
+    public function kat_tindakans()
+    {
+        return $this->hasMany(kat_tindakan::class, 'idkategori', 'idkategori');
+    }
 }

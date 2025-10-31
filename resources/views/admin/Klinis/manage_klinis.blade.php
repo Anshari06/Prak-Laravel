@@ -37,9 +37,7 @@
                                 <tr>
                                     <th style="width:70px">No</th>
                                     <th>ID</th>
-                                    <th>Pet</th>
-                                    <th>Tanggal</th>
-                                    <th>Catatan</th>
+                                    <th>Nama Kategori Klinis</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -47,11 +45,8 @@
                                 @forelse(($kliniss ?? collect()) as $i => $k)
                                     <tr>
                                         <td>{{ $i + 1 }}</td>
-                                        <td>{{ $k->idklinis ?? ($k->id ?? '-') }}</td>
-                                        <td>{{ $k->pet->nama ?? '-' }}</td>
-                                        <td>{{ $k->tanggal ?? '-' }}</td>
-                                        <td>{{ \Illuminate\Support\Str::limit($k->catatan ?? '-', 80) }}
-                                        </td>
+                                        <td>{{ $k->idkategori_klinis}}</td>
+                                        <td>{{$k->nama_kategori_klinis}}</td>
                                         <td>
                                             <div class="d-grid gap-2 d-md-block">
                                                 <a href="#"

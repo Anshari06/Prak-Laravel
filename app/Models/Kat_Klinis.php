@@ -13,4 +13,9 @@ class Kat_Klinis extends Model
         'nama_kategori_klinis',
         'deskripsi',
     ];
+
+    public function kat_tindakans()
+    {
+        return $this->hasMany(kat_tindakan::class, 'idkategori_klinis', 'idkategori_klinis');
+    }
 }

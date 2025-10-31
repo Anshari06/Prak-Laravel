@@ -14,4 +14,14 @@ class kat_tindakan extends Model
         'idkategori',
         'idkategori_klinis',
     ];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Categories::class, 'idkategori', 'idkategori');
+    }
+
+    public function kat_klinis()
+    {
+        return $this->belongsTo(Kat_Klinis::class, 'idkategori_klinis', 'idkategori_klinis');
+    }
 }

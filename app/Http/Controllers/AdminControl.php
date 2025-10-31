@@ -78,8 +78,8 @@ class AdminControl extends Controller
 
     public function manageKat_tindakan()
     {
-        $Categories = kat_tindakan::all();
-        return view('admin.Tindakan.manage_tindakan', compact('Categories'));
+        $tindakans = kat_tindakan::all();
+        return view('admin.Tindakan.manage_tindakan', compact('tindakans'));
     }
 
     
