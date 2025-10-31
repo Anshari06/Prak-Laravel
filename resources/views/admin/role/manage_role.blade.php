@@ -51,7 +51,7 @@
                                 @forelse(($roles ?? collect()) as $i => $role)
                                     <tr>
                                         <td>{{ $i + 1 }}</td>
-                                        <td>{{ $role->id ?? ($role->idrole ?? '-') }}</td>
+                                        <td>{{ $role->idrole ?? ($role->idrole ?? '-') }}</td>
                                         <td>{{ $role->nama_role ?? ($role->name ?? '-') }}</td>
                                         <td>
                                             <div class="d-grid gap-2 d-md-block">

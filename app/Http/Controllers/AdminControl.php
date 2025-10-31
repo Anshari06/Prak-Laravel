@@ -12,6 +12,7 @@ use App\Models\Pet;
 use App\Models\Pemilik;
 use App\Models\Role;
 use App\Models\Categories;
+use App\Models\ras_hewan;
 
 class AdminControl extends Controller
 {
@@ -26,7 +27,7 @@ class AdminControl extends Controller
         $petCount = Pet::count();
         $pemilikCount = Pemilik::count();
 
-        return view('admin.index', compact('users', 'usersCount', 'petCount'));
+        return view('admin.index', compact('users', 'usersCount', 'petCount', 'pemilikCount'));
     }
 
     public function manageUsers()
@@ -37,8 +38,8 @@ class AdminControl extends Controller
 
     public function managePemilik()
     {
-        $Pemiliks = Pemilik::all();
-        return view('admin.pemilik.manage_pemilik', compact('Pemiliks'));
+        $pemiliks = Pemilik::with('user')->get();
+        return view('admin.pemilik.manage_pemilik', compact('pemiliks'));
     }
 
     public function manageJenisHewan()
@@ -46,17 +47,22 @@ class AdminControl extends Controller
         $jenisHewans = Jenis_Hewan::all();
         return view('admin.jenis_hewan.manage_jenis_hewan', compact('jenisHewans'));
     }
+    public function manageRasHewan()
+    {
+        $jenisHewans = ras_hewan::with('jenis_Hewan')->get();
+        return view('admin.jenis_hewan.manage_jenis_hewan', compact('jenisHewans'));
+    }
 
     public function managePets()
     {
-        $pets = Pet::all();
+        $pets = Pet::with('ras_hewan', 'pemilik')->get();
         return view('admin.pet.manage_pet', compact('pets'));
     }
 
     public function manageRoles()
     {
-        $Roles = Role::all();
-        return view('admin.role.manage_role', compact('Roles'));
+        $roles = Role::all();
+        return view('admin.role.manage_role', compact('roles'));
     }
 
     public function manageKat_klinis()

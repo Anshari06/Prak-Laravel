@@ -57,7 +57,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($Pemiliks as $i => $pemilik)
+                                    @foreach ($pemiliks as $i => $pemilik)
                                         <tr>
                                             <td>{{ $i + 1 }}</td>
                                             <td>{{ $pemilik->idpemilik ?? ($pemilik->iduser ?? '-') }}

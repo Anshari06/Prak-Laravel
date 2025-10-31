@@ -37,7 +37,8 @@
                                 <tr>
                                     <th style="width:70px">No</th>
                                     <th>ID</th>
-                                    <th>Nama</th>
+                                    <th>Nama Hewan</th>
+                                    <th>Ras Hewan</th>
                                     <th>Jenis</th>
                                     <th>Pemilik</th>
                                     <th>Aksi</th>
@@ -49,8 +50,8 @@
                                         <td>{{ $i + 1 }}</td>
                                         <td>{{ $pet->idpet ?? ($pet->id ?? '-') }}</td>
                                         <td>{{ $pet->nama ?? ($pet->name ?? '-') }}</td>
-                                        <td>{{ $pet->jenis_hewan->nama_jenis_hewan ?? ($pet->jenis ?? '-') }}
-                                        </td>
+                                        <td>{{ $pet->ras_hewan->nama_ras ?? ($pet->jenis ?? '-') }}</td>
+                                        <td>{{ $pet->ras_hewan->jenisHewan->nama_jenis_hewan ?? ($pet->jenis ?? '-') }}</td>
                                         <td>{{ $pet->pemilik->user->nama ?? ($pet->pemilik->nama ?? '-') }}
                                         </td>
                                         <td>
