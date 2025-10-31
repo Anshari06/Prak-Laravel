@@ -65,22 +65,22 @@ class AdminControl extends Controller
         return view('admin.role.manage_role', compact('roles'));
     }
 
+    public function manageKategori()
+    {
+        $kategoris = Categories::all();
+        return view('admin.kategori.manage_kategori', compact('kategoris'));
+    }
     public function manageKat_klinis()
     {
-        $Categories = Kat_Klinis::all();
-        return view('admin.category.manage_category', compact('Categories'));
+        $kliniss = Kat_Klinis::all();
+        return view('admin.Klinis.manage_klinis', compact('kliniss'));
     }
 
     public function manageKat_tindakan()
     {
         $Categories = kat_tindakan::all();
-        return view('admin.category.manage_category', compact('Categories'));
+        return view('admin.Tindakan.manage_tindakan', compact('Categories'));
     }
 
-    public function manageKatTindakan()
-    {
-        $Categories = Categories::all();
-        return view('admin.category.manage_category', compact('Categories'));
-    }
     
 }

@@ -15,6 +15,6 @@ Route::get('/manage-pemilik', [App\Http\Controllers\AdminControl::class, 'manage
 Route::get('/manage-jenis', [App\Http\Controllers\AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');
 Route::get('/manage-pet', [App\Http\Controllers\AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');
 Route::get('/manage-role', [App\Http\Controllers\AdminControl::class, 'manageRoles'])->name('admin.role.manage_role');
-Route::get('/manage-kategori', [App\Http\Controllers\AdminControl::class, 'manageKatTindakan'])->name('admin.tindakan.manage_tindakan');
-Route::get('/manage-kategori-klinis', [App\Http\Controllers\AdminControl::class, 'manageKatKlinis'])->name('admin.kategori_klinis.manage_kategori_klinis');
-Route::get('/manage-tindakan', [App\Http\Controllers\AdminControl::class, 'manageKat_tindakan'])->name('admin.kategori.manage_kategori');
+Route::get('/manage-kategori', [App\Http\Controllers\AdminControl::class, 'manageKategori'])->name('admin.tindakan.manage_kategori');
+Route::get('/manage-kategori-klinis', [App\Http\Controllers\AdminControl::class, 'manageKat_klinis'])->name('admin.Klinis.manage_klinis');
+Route::get('/manage-tindakan', [App\Http\Controllers\AdminControl::class, 'manageKat_tindakan'])->name('admin.kategori.manage_tindakan');
