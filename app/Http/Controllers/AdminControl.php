@@ -11,7 +11,9 @@ class AdminControl extends Controller
     {
         // Load users so the admin dashboard can display the users table
         $users = User::all();
-        return view('admin.index', compact('users'));
+        $usercount = User::count();
+
+        return view('admin.index', compact('users', 'usercount'));
     }
 
     public function manageUsers()

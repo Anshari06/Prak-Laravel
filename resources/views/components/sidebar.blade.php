@@ -9,25 +9,27 @@
 
 <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
     <div class="container-fluid">
-        <a class="navbar-brand gap-3 text-white fs-5 fw-bold" href="#">
+        {{-- Brand: image + wrapped text. Use flex so the text can wrap within sidebar width. --}}
+        <a class="navbar-brand d-flex align-items-start gap-2 text-white fs-5 fw-bold" href="#">
             <img src="{{ asset('img/logo-uner.png') }}" alt="Unair" width="50"
-                class="d-inline-block align-text-center ">
-            Proyek PBD Cuy
+                class="flex-shrink-0 me-2">
+            <span class="text-wrap flex-shrink-1"
+                style="white-space: normal; word-break: break-word;">
+                Rumah Sakit Pendidikan Hewan Unair
+            </span>
         </a>
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <x-nav-link href="/" :active="request()->is('/')"
+            <x-nav-link href="/dashboard" :active="request()->is('/dashboard')"
                 icn="bi bi-house-door me-2">Dashboard</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage_user" :active="request()->is('manage_user')" icn="bi bi-people me-2">
+            <x-nav-link href="/manage-user" :active="request()->is('manage-user')" icn="bi bi-people me-2">
                 Manage User</x-nav-link>
         </li>
         <li>
