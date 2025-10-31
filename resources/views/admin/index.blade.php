@@ -50,10 +50,10 @@
                         <div class="col-6 col-md-3">
                             <div class="card shadow-sm">
                                 <div class="card-body d-flex align-items-center">
-                                    <i class="bi bi-box fs-1 text-success me-3"></i>
+                                    <i class="bi bi-paw fs-1 text-success me-3"></i>
                                     <div>
-                                        <div class="text-muted small">Barang Ready</div>
-                                        {{-- <div class="fs-3 fw-bold">{{ $barangCount ?? '—' }}</div> --}}
+                                        <div class="text-muted small">Pet Ready</div>
+                                        <div class="fs-3 fw-bold">{{ $jenisCount ?? '—' }}</div>
                                     </div>
                                 </div>
                             </div>
