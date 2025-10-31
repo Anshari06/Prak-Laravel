@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Categories extends Model
+{
+    protected $table = 'Kategori';
+    protected $primaryKey = 'idkategori';
+
+    protected $fillable = [
+        'nama_kategori',
+        'nama_kategori',
+    ];
+}

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Jenis_Hewan;
+use App\Models\Kat_Klinis;
 use App\Models\Pet;
 // use App\Models\ras_hewan;
 use App\Models\Pemilik;
+use App\Models\Role;
 
 class AdminControl extends Controller
 {
@@ -55,10 +57,12 @@ class AdminControl extends Controller
         return view('admin.role.manage_role', compact('Roles'));
     }
 
-    public function manageCategories()
+    public function manageKat_klinis()
     {
-        $Categories = Category::all();
+        $Categories = Kat_Klinis::all();
         return view('admin.category.manage_category', compact('Categories'));
     }
+
+    
     
 }

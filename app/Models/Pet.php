@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pet extends Model
 {
     protected $table = 'pet';
+    protected $primaryKey = 'idpet';
 
     protected $fillable = [
         'name',
