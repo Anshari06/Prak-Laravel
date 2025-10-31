@@ -10,8 +10,9 @@
     <!-- Bootstrap Icons && third party icons -->
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" />
     <title>Dashboard</title>
 </head>
 
@@ -55,73 +56,72 @@
                                     <i class="fa-solid fa-paw fs-1 text-primary me-3"></i>
                                     <div>
                                         <div class="text-muted small">Pet Terdaftar</div>
-                                        <div class="fs-3 fw-bold">{{ $jenisCount ?? '—' }}</div>
+                                        <div class="fs-3 fw-bold">{{ $petCount ?? '—' }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-3">
+                        {{-- <div class="col-6 col-md-3">
                             <div class="card shadow-sm">
                                 <div class="card-body d-flex align-items-center">
                                     <i class="bi bi-building-fill fs-1 text-warning me-3"></i>
                                     <div>
                                         <div class="text-muted small">Vendor Aktif</div>
-                                        {{-- <div class="fs-3 fw-bold">{{ $vendorCount ?? '—' }}</div> --}}
+                                        <div class="fs-3 fw-bold">{{ $vendorCount ?? '—' }}</div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+
                     </div>
                 </div>
             </div>
-            {{-- Table penjualan terbaru --}}
+            {{-- Users table --}}
             <div class="container-fluid p-3">
                 <div class="card">
                     <div class="card-header">
-                        <strong>Latest Penjualan</strong>
+                        <strong>Users</strong>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            {{-- <table class="table table-sm table-hover mb-0">
+                            <table class="table table-sm table-hover mb-0">
                                 <thead class="table-light">
                                     <tr>
                                         <th style="width:60px">#</th>
-                                        <th>ID Penjualan</th>
-                                        <th>Tanggal</th>
-                                        <th class="text-end">Subtotal</th>
-                                        <th class="text-end">Total</th>
-                                        <th>ID Margin</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th class="text-end">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($penjualanterbaru as $i => $p)
+                                    @forelse($users as $i => $user)
                                         <tr>
                                             <td>{{ $i + 1 }}</td>
-                                            <td>{{ $p->idpenjualan ?? '-' }}</td>
-                                            <td>{{ isset($p->created_at) ? \Carbon\Carbon::parse($p->created_at)->format('d M Y H:i') : '-' }}
+                                            <td>{{ $user->iduser ?? '-' }}</td>
+                                            <td>{{ $user->nama ?? '-' }}</td>
+                                            <td>{{ $user->email ?? '-' }}</td>
                                             </td>
                                             <td class="text-end">
-                                                {{ isset($p->subtotal_nilai) ? number_format($p->subtotal_nilai, 0, ',', '.') : '-' }}
+                                                {{-- Example actions: view / edit (implement routes later) --}}
+                                                <a href="#"
+                                                    class="btn btn-sm btn-outline-primary">View</a>
                                             </td>
-                                            <td class="text-end">
-                                                {{ isset($p->total) ? number_format($p->total, 0, ',', '.') : '-' }}
-                                            </td>
-                                            <td>{{ $p->idmargin_penjualan ?? '-' }}</td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-center py-4">No recent
-                                                penjualan found</td>
+                                            <td colspan="6" class="text-center py-4">No users
+                                                found</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
-                            </table> --}}
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
     </main>
