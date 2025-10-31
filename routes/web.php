@@ -11,4 +11,5 @@ Route::get('/', function () {
 // Admin Route
 Route::get('/dashboard', [App\Http\Controllers\AdminControl::class, 'index'])->name('admin.index');
 Route::get('/manage-user', [App\Http\Controllers\AdminControl::class, 'manageUsers'])->name('admin.manage_user');
+Route::get('/manage-pemilik', [App\Http\Controllers\AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
 Route::get('/manage-jenis-hewan', [App\Http\Controllers\JenisHewanController::class, 'index'])->name('admin.jenis_hewan.index');

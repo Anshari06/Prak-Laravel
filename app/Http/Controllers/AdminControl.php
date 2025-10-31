@@ -32,4 +32,10 @@ class AdminControl extends Controller
         $users = User::all();
         return view('admin.user.manage_user', compact('users'));
     }
+
+    public function managePemilik()
+    {
+        $Pemiliks = Pemilik::all();
+        return view('admin.pemilik.manage_pemilik', compact('Pemiliks'));
+    }
 }

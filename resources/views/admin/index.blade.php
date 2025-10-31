@@ -102,6 +102,7 @@
                                             <td>{{ $user->iduser ?? '-' }}</td>
                                             <td>{{ $user->nama ?? '-' }}</td>
                                             <td>{{ $user->email ?? '-' }}</td>
+                                            
                                             <td class="text-end">
                                                 {{-- Example actions: view / edit (implement routes later) --}}
                                                 <a href="#"
