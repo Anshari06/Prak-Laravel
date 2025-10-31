@@ -59,15 +59,15 @@
                 Manajemen Kategori </span>
         </li>
         <li>
-            <x-nav-link href="/manage-kategori" :active="request()->is('manage-pet')" icn="bi bi-list-ul me-2">
+            <x-nav-link href="/manage-kategori" :active="request()->is('manage-kategori')" icn="bi bi-list-ul me-2">
                 Daftar Kategori</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage-kategori" :active="request()->is('manage-pet')" icn="bi bi-heart-pulse-fill me-2">
+            <x-nav-link href="/manage-kategori-klinis" :active="request()->is('manage-kategori-klinis')" icn="bi bi-heart-pulse-fill me-2">
                 Daftar Kategori Klinis</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage-kategori" :active="request()->is('manage-pet')" icn="bi bi-heart-pulse me-2">
+            <x-nav-link href="/manage-tindakan" :active="request()->is('manage-tindakan')" icn="bi bi-heart-pulse me-2">
                 Daftar Kategori Tindakan Terapi</x-nav-link>
         </li>
 

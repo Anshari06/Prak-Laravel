@@ -11,6 +11,7 @@ use App\Models\Pet;
 // use App\Models\ras_hewan;
 use App\Models\Pemilik;
 use App\Models\Role;
+use App\Models\Categories;
 
 class AdminControl extends Controller
 {
@@ -70,5 +71,10 @@ class AdminControl extends Controller
         return view('admin.category.manage_category', compact('Categories'));
     }
 
+    public function manageKatTindakan()
+    {
+        $Categories = Categories::all();
+        return view('admin.category.manage_category', compact('Categories'));
+    }
     
 }
