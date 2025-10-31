@@ -6,10 +6,13 @@
         text-decoration: none;
     }
 </style>
+{{-- icon --}}
 
-<link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+<head>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+</head>
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
     <div class="container-fluid">
         {{-- Brand: image + wrapped text. Use flex so the text can wrap within sidebar width. --}}
@@ -37,8 +40,12 @@
                 Manage Pemilik</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bi bi-box-seam me-2">
+            <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bx bxs-paw-print me-2">
                 Manage Jenis Hewan</x-nav-link>
+        </li>
+        <li>
+            <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bx bx-paw-print reguler me-2">
+                Manage Pets</x-nav-link>
         </li>
         <li class="nav-item">
             <x-nav-link href="/orders" :active="request()->is('orders')" icn="bi bi-table me-2">Orders</x-nav-link>
