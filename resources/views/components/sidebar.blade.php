@@ -16,7 +16,8 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
     <div class="container-fluid">
         {{-- Brand: image + wrapped text. Use flex so the text can wrap within sidebar width. --}}
-        <a class="navbar-brand d-flex align-items-start gap-2 text-white fs-5 fw-bold" href="#">
+        <a class="navbar-brand d-flex align-items-start gap-2 text-white fs-5 fw-bold"
+            href="/dashboard">
             <img src="{{ asset('img/logo-uner.png') }}" alt="Unair" width="50"
                 class="flex-shrink-0 me-2">
             <span class="text-wrap flex-shrink-1"
@@ -36,6 +37,10 @@
                 Manage User</x-nav-link>
         </li>
         <li>
+            <x-nav-link href="/manage-role" :active="request()->is('manage-role')" icn="bi bi-person-circle me-2">
+                Manage Role</x-nav-link>
+        </li>
+        <li>
             <x-nav-link href="/manage-pemilik" :active="request()->is('manage-pemilik')" icn="bi bi-person me-2">
                 Manage Pemilik</x-nav-link>
         </li>
@@ -47,15 +52,25 @@
             <x-nav-link href="/manage-pet" :active="request()->is('manage-pet')" icn="bx bx-paw-print reguler me-2">
                 Manage Pets</x-nav-link>
         </li>
-        <li class="nav-item">
-            <x-nav-link href="/orders" :active="request()->is('orders')" icn="bi bi-table me-2">Orders</x-nav-link>
+        <hr>
+        <li>
+            <span class="text-wrap flex-shrink-1 fw-bold"
+                style="white-space: normal; word-break: break-word;">
+                Manajemen Kategori </span>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
-                <i class="bi bi-people me-2"></i>
-                Customers
-            </a>
+            <x-nav-link href="/manage-kategori" :active="request()->is('manage-pet')" icn="bi bi-list-ul me-2">
+                Daftar Kategori</x-nav-link>
         </li>
+        <li>
+            <x-nav-link href="/manage-kategori" :active="request()->is('manage-pet')" icn="bi bi-heart-pulse-fill me-2">
+                Daftar Kategori Klinis</x-nav-link>
+        </li>
+        <li>
+            <x-nav-link href="/manage-kategori" :active="request()->is('manage-pet')" icn="bi bi-heart-pulse me-2">
+                Daftar Kategori Tindakan Terapi</x-nav-link>
+        </li>
+
     </ul>
     <hr>
     <div class="dropdown">

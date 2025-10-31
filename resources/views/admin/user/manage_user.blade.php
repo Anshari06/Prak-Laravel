@@ -61,7 +61,7 @@
                                             <td>{{ $i + 1 }}</td> {{-- Menampilkan nomor urut --}}
                                             <td>{{ $user->nama }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>{{ $user->nama_role ?? 'belum tersambung'}}</td>
+                                            <td>{{ $user->nama_role ?? 'belum tersambung' }}</td>
                                             <td>
                                                 <div class=" d-grid gap-2 d-md-block">
                                                     <a {{-- href="{{ route('.show', $barang->idbarang) }}" --}}

@@ -48,4 +48,17 @@ class AdminControl extends Controller
         $pets = Pet::all();
         return view('admin.pet.manage_pet', compact('pets'));
     }
+
+    public function manageRoles()
+    {
+        $Roles = Role::all();
+        return view('admin.role.manage_role', compact('Roles'));
+    }
+
+    public function manageCategories()
+    {
+        $Categories = Category::all();
+        return view('admin.category.manage_category', compact('Categories'));
+    }
+    
 }
