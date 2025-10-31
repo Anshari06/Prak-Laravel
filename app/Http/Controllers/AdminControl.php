@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-// use App\Models\Jenis_Hewan;
+use App\Models\Jenis_Hewan;
 use App\Models\Pet;
 // use App\Models\ras_hewan;
 use App\Models\Pemilik;
@@ -22,8 +22,6 @@ class AdminControl extends Controller
         $petCount = Pet::count();
         $pemilikCount = Pemilik::count();
 
-
-
         return view('admin.index', compact('users', 'usersCount', 'petCount'));
     }
 
@@ -37,5 +35,17 @@ class AdminControl extends Controller
     {
         $Pemiliks = Pemilik::all();
         return view('admin.pemilik.manage_pemilik', compact('Pemiliks'));
+    }
+
+    public function manageJenisHewan()
+    {
+        $jenisHewans = Jenis_Hewan::all();
+        return view('admin.jenis_hewan.manage_jenis_hewan', compact('jenisHewans'));
+    }
+
+    public function managePets()
+    {
+        $pets = Pet::all();
+        return view('admin.pet.manage_pet', compact('pets'));
     }
 }

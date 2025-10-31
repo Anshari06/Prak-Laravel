@@ -40,11 +40,11 @@
                 Manage Pemilik</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bx bxs-paw-print me-2">
+            <x-nav-link href="/manage-jenis" :active="request()->is('manage-jenis')" icn="bx bxs-paw-print me-2">
                 Manage Jenis Hewan</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage_barang" :active="request()->is('manage_barang')" icn="bx bx-paw-print reguler me-2">
+            <x-nav-link href="/manage-pet" :active="request()->is('manage-pet')" icn="bx bx-paw-print reguler me-2">
                 Manage Pets</x-nav-link>
         </li>
         <li class="nav-item">

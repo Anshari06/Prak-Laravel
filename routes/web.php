@@ -12,4 +12,5 @@ Route::get('/', function () {
 Route::get('/dashboard', [App\Http\Controllers\AdminControl::class, 'index'])->name('admin.index');
 Route::get('/manage-user', [App\Http\Controllers\AdminControl::class, 'manageUsers'])->name('admin.manage_user');
 Route::get('/manage-pemilik', [App\Http\Controllers\AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
-Route::get('/manage-jenis-hewan', [App\Http\Controllers\JenisHewanController::class, 'index'])->name('admin.jenis_hewan.index');
+Route::get('/manage-jenis', [App\Http\Controllers\AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');
+Route::get('/manage-pet', [App\Http\Controllers\AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');

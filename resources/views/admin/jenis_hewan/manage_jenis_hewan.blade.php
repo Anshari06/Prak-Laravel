@@ -43,10 +43,10 @@
                             <table class="table table-sm table-hover mb-0">
                                 <thead class="table-light">
                                     <tr>
-                                        <th style="width:60px">#</th>
-                                        <th>ID</th>
-                                        <th>Nama Jenis Hewan</th>
-                                        <th class="text-end">Actions</th>
+                                        <th style="width:60px">Num</th>
+                                        <th scope="row">ID</th>
+                                        <th scope="row">Nama Jenis Hewan</th>
+                                        <th scope="row">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,9 +55,31 @@
                                             <td>{{ $i + 1 }}</td>
                                             <td>{{ $jenis->idjenis_hewan ?? '-' }}</td>
                                             <td>{{ $jenis->nama_jenis_hewan ?? '-' }}</td>
-                                            <td class="text-end">
-                                                <a href="#"
-                                                    class="btn btn-sm btn-outline-primary">Edit</a>
+                                            <td>
+                                                <div class=" d-grid gap-2 d-md-block">
+                                                    <a {{-- href="{{ route('.show', $barang->idbarang) }}" --}}
+                                                        class="btn btn-sm btn-info p-1 px-2"
+                                                        title="Lihat">
+                                                        <i class="bi bi-eye fs-6"></i>
+                                                    </a>
+                                                    <a {{-- href="{{ route('.edit', $barang->idbarang) }}" --}}
+                                                        class="btn btn-sm btn-warning p-1 px-2"
+                                                        title="Edit">
+                                                        <i class="bi bi-pencil fs-6"></i>
+                                                    </a>
+                                                    <form {{-- action="{{ route('.destroy', $barang->idbarang) }}" --}} method="POST"
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-sm btn-danger p-1 px-2"
+                                                            title="Hapus">
+                                                            <i class="bi bi-trash fs-6"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+
                                             </td>
                                         </tr>
                                     @empty
