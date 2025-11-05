@@ -18,3 +18,6 @@ Route::get('/manage-role', [App\Http\Controllers\AdminControl::class, 'manageRol
 Route::get('/manage-kategori', [App\Http\Controllers\AdminControl::class, 'manageKategori'])->name('admin.tindakan.manage_kategori');
 Route::get('/manage-kategori-klinis', [App\Http\Controllers\AdminControl::class, 'manageKat_klinis'])->name('admin.Klinis.manage_klinis');
 Route::get('/manage-tindakan', [App\Http\Controllers\AdminControl::class, 'manageKat_tindakan'])->name('admin.kategori.manage_tindakan');
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
