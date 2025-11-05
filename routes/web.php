@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ResepsionisController;
 use App\Http\Controllers\Auth_Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// admin role
 Route::get('/dashboard', [App\Http\Controllers\AdminControl::class, 'index'])->name('admin.index');
 Route::get('/manage-user', [App\Http\Controllers\AdminControl::class, 'manageUsers'])->name('admin.manage_user');
 Route::get('/manage-pemilik', [App\Http\Controllers\AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
@@ -27,4 +29,6 @@ Route::get('/manage-role', [App\Http\Controllers\AdminControl::class, 'manageRol
 Route::get('/manage-kategori', [App\Http\Controllers\AdminControl::class, 'manageKategori'])->name('admin.tindakan.manage_kategori');
 Route::get('/manage-kategori-klinis', [App\Http\Controllers\AdminControl::class, 'manageKat_klinis'])->name('admin.Klinis.manage_klinis');
 Route::get('/manage-tindakan', [App\Http\Controllers\AdminControl::class, 'manageKat_tindakan'])->name('admin.kategori.manage_tindakan');
+// Resepsionis role
+Route::get('/resepsionis-dashboard', [ResepsionisController::class, 'index'])->name('resepsionis.index');
 
