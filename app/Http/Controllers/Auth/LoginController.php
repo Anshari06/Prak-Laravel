@@ -3,7 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+
 
 class LoginController extends Controller
 {
@@ -18,14 +25,14 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    // use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -36,5 +43,65 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+    }
+
+    public function ShowLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $user = User::with(['RoleUser' => function ($query) {
+            $query->where('status', 1);
+        }, 'RoleUser'])
+        ->where('email', $request->email)
+        ->first();
+
+        if (!$user) {
+            return back()
+            ->withErrors(['email' => 'Email tidak ditemukan'])
+            ->withInput();
+        }
+
+        // cek password
+        if (!Hash::check($request->password, $user->password)) {
+            return back()
+            ->withErrors(['password' => 'Password salah'])
+            ->withInput();
+        }
+
+        $namarole = role::where('idrole', $user->roleUser[0]->idrole)->first();
+
+        Auth::login($user);
+
+        $request->session()->put([
+            'user_id' => $user->iduser,
+            'user_name' => $user->name ?? $user->nama,
+            'user_email' => $user->email,
+            'user_role' => $namarole->nama_role[0]->idrole ?? 'user',
+            'user_role_name' => $namarole->nama_role ?? 'user',
+            'user_status' => $user->roleUser[0]->status ?? 'active',
+        ]);
+
+        return redirect()->intended('/home')->with('success', 'Login berhasil');
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login')->with('logout_success', 'Logout berhasil');
     }
 }

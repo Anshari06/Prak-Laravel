@@ -19,6 +19,7 @@ class User extends Authenticatable
      */
     protected $table = 'user';
     protected $primaryKey = 'iduser'; // Primary key
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
@@ -37,17 +38,14 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string,string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
     public function Pemilik()
     {
@@ -56,6 +54,7 @@ class User extends Authenticatable
 
     public function RoleUser()
     {
-        return $this->hasMany(Role::class, 'iduser', 'iduser');
+        // RoleUser is the pivot/association model (role_user table)
+        return $this->hasMany(RoleUser::class, 'iduser', 'iduser');
     }
 }

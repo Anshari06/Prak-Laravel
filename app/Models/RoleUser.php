@@ -13,6 +13,7 @@ class RoleUser extends Model
     protected $fillable = [
         'idrole',
         'iduser',
+        'status',
     ];
 
     public function role()
