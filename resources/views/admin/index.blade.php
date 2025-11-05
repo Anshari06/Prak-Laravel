@@ -31,7 +31,7 @@
         {{-- Content Area --}}
         <div class="flex-grow-1">
             <div class="container-fluid p-3">
-                <h2 class="mt-0 mb-2">Welcome</h2>
+                <h2 class="mt-0 mb-2">Welcome {{session('user_name')}}!</h2> 
                 <p class="mb-3">Your data is right here</p>
 
                 {{-- Statistik cards (akan menampilkan jumlah dari DB) --}}
