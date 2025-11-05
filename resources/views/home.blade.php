@@ -15,7 +15,11 @@
                     @endif
 
                     {{ __('You are logged in as a') }} {{ session('user_role_name') }}!
+                    <div class="container">
+                        <a href="{{ route('admin.index') }}" class="btn btn-primary mt-3">Go to Admin Dashboard</a>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </div>
