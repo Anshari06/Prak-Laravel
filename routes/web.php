@@ -16,12 +16,12 @@ Route::get('/', function () {
 // Route::middleware(['guest'])->group(function () {
 
 // });
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // admin role
 Route::middleware(['IsAdministrator'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\AdminControl::class, 'index'])->name('admin.index');
+    Route::get('/admin-dashboard', [App\Http\Controllers\AdminControl::class, 'index'])->name('admin.index');
     Route::get('/manage-user', [App\Http\Controllers\AdminControl::class, 'manageUsers'])->name('admin.manage_user');
     Route::get('/manage-pemilik', [App\Http\Controllers\AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
     Route::get('/manage-jenis', [App\Http\Controllers\AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');

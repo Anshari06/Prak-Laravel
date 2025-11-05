@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class IsResepsionis
 {
@@ -15,6 +16,16 @@ class IsResepsionis
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $userRole = session('user_role');
+
+        if ($userRole == 4) {
+            return $next($request);
+        } else {
+            return back()->with('error', 'You do not have administrator access.');
+        }
     }
 }

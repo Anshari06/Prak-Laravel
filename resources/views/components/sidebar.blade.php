@@ -29,7 +29,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <x-nav-link href="/dashboard" :active="request()->is('dashboard')"
+            <x-nav-link href="/admin-dashboard" :active="request()->is('admin-dashboard')"
                 icn="bi bi-house-door me-2">Dashboard</x-nav-link>
         </li>
         <li>
@@ -79,11 +79,11 @@
             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="" width="32" height="32"
                 class="rounded-circle me-2">
-            <strong>mdo</strong>
+            <strong>{{ session('user_name') ?? (Auth::user()->nama ?? Auth::user()->name ?? 'User') }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
             aria-labelledby="dropdownUser1" style="">
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li><a class="dropdown-item" href="/logout">Sign out</a></li>
         </ul>
     </div>
 </div>
