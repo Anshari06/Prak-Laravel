@@ -13,4 +13,9 @@ class role extends Model
     protected $fillable = [
         'nama_role',
     ];
+
+    public function RoleUser()
+    {
+        return $this->hasMany(RoleUser::class, 'idrole', 'idrole');
+    }
 }
