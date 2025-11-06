@@ -67,11 +67,6 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
             aria-labelledby="dropdownUser2">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form-r').submit();">Logout</a>

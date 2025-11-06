@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Role;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Jenis_Hewan;
 use App\Models\Kat_Klinis;
 use App\Models\kat_tindakan;
 use App\Models\Pet;
-// use App\Models\ras_hewan;
 use App\Models\Pemilik;
 use App\Models\Role;
 use App\Models\Categories;
@@ -81,6 +80,4 @@ class AdminControl extends Controller
         $tindakans = kat_tindakan::all();
         return view('admin.Tindakan.manage_tindakan', compact('tindakans'));
     }
-
-    
 }
