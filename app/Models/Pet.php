@@ -21,6 +21,11 @@ class Pet extends Model
         return $this->belongsTo(Ras_Hewan::class, 'idras_hewan', 'idras_hewan');
     }
 
+    public function jenis_hewan()
+    {
+        return $this->ras_hewan->jenisHewan();
+    }
+
     public function pemilik()
     {
         return $this->belongsTo(Pemilik::class, 'idpemilik', 'idpemilik');

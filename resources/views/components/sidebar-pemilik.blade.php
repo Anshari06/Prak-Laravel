@@ -40,7 +40,7 @@
             </x-nav-link>
         </li>
         <li class="nav-item">
-            <x-nav-link href="/pemilik-pemilik" :active="request()->is('pemilik-pemilik')"
+            <x-nav-link href="/pemilik-reservasi" :active="request()->is('pemilik-reservasi')"
                 icn="bi bi-person-plus me-2">
                 Data Reservasi
             </x-nav-link>
