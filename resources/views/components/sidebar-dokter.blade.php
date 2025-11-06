@@ -34,31 +34,27 @@
                 icn="bi bi-house-door me-2">Dashboard</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/dokter/jadwal" :active="request()->is('dokter/jadwal')" icn="bi bi-calendar3 me-2">
-                Jadwal Praktek</x-nav-link>
+            <x-nav-link href="/dokter/rekam" :active="request()->is('dokter/rekam')" icn="bi bi-folder2-open me-2">
+                Rekam Medis</x-nav-link>
         </li>
-        <li>
+        {{-- <li>
             <x-nav-link href="/dokter/pasien" :active="request()->is('dokter/pasien')" icn="bi bi-people me-2">
                 Pasien</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/dokter/rekam" :active="request()->is('dokter/rekam')" icn="bi bi-folder2-open me-2">
-                Rekam Medis</x-nav-link>
-        </li>
-        <li>
             <x-nav-link href="/dokter/resep" :active="request()->is('dokter/resep')" icn="bi bi-prescription me-2">
                 Resep / Terapi</x-nav-link>
-        </li>
-        <hr>
-        <li>
+        </li> --}}
+        {{-- <hr> --}}
+        {{-- <li>
             <span class="text-wrap flex-shrink-1 fw-bold"
                 style="white-space: normal; word-break: break-word;">
                 Tools & Lainnya </span>
-        </li>
-        <li>
+        </li> --}}
+        {{-- <li>
             <x-nav-link href="/dokter/pasien/rujuk" :active="request()->is('dokter/pasien/rujuk')" icn="bi bi-arrow-right-square me-2">
                 Rujukan</x-nav-link>
-        </li>
+        </li> --}}
     </ul>
     <hr>
     <div class="dropdown">

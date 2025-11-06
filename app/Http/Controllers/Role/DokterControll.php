@@ -21,8 +21,10 @@ class DokterControll extends Controller
             $rekamMedis = collect();
         } else {
             $rekamMedis = RekamMedis::where('dokter_pemeriksa', $roleUserId)->get();
+            $totalRekamMedis = $rekamMedis->count();
         }
 
-        return view('Dokter.index', compact('rekamMedis'));
+
+        return view('Dokter.index', compact('rekamMedis', 'totalRekamMedis'));
     }
 }
