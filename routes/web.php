@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Role\DokterControll;
 use App\Http\Controllers\Role\AdminControl;
+use App\Http\Controllers\Role\Pemilik;
 
 Route::get('/', function () {
     return view('home_rsph');
@@ -40,4 +41,9 @@ Route::middleware(['IsResepsionis'])->group(function () {
 Route::middleware(['IsDokter'])->group(function () {
     Route::get('/dokter-dashboard', [DokterControll::class, 'index'])->name('dokter.index');
     Route::get('/dokter/rekam', [DokterControll::class, 'index'])->name('dokter.rekam.rekam');
+});
+
+// Pemilik Role
+Route::middleware(['IsPemilik'])->group(function () {
+    Route::get('/pemilik-dashboard', [Pemilik::class, 'index'])->name('pemilik.index');
 });
