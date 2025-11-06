@@ -80,7 +80,8 @@ class LoginController extends Controller
                 ->withInput();
         }
 
-        $namarole = role::where('idrole', $user->roleUser[0]->idrole)->first();
+        $roleEntry = $user->roleUser[0] ?? null;
+        $namarole = $roleEntry ? Role::where('idrole', $roleEntry->idrole)->first() : null;
 
         Auth::login($user);
 
@@ -89,9 +90,11 @@ class LoginController extends Controller
             'user_id' => $user->iduser,
             'user_name' => $user->name ?? $user->nama,
             'user_email' => $user->email,
-            'user_role' => $namarole->idrole ?? 'user',
+            // store role id (idrole) and pivot id (idrole_user) separately
+            'user_role' => $roleEntry->idrole ?? 'user',
+            'user_role_id' => $roleEntry->idrole_user ?? null,
             'user_role_name' => $namarole->nama_role ?? 'user',
-            'user_status' => $user->roleUser[0]->status ?? 'active',
+            'user_status' => $roleEntry->status ?? 'active',
         ]);
 
         $userRole = $user->roleUser[0]->idrole ?? null;
@@ -100,7 +103,7 @@ class LoginController extends Controller
             case 1:
                 return redirect()->route('admin.index')->with('success', 'Login berhasil');
             case 2:
-                return redirect()->route('dokter.dashboard')->with('success', 'Login berhasil');
+                return redirect()->route('dokter.index')->with('success', 'Login berhasil');
             case 3:
                 return redirect()->route('perawat.dashboard')->with('success', 'Login berhasil');
             case 4:

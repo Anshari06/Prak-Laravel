@@ -25,4 +25,14 @@ class RoleUser extends Model
     {
         return $this->belongsTo(User::class, 'iduser', 'iduser');
     }
+
+    public function pemilik()
+    {
+        return $this->hasOne(Pemilik::class, 'iduser', 'iduser');
+    }
+
+    public function Rekam()
+    {
+        return $this->hasOne(RekamMedis::class, 'idrole_user', 'dokter_pemeriksa');
+    }
 }
