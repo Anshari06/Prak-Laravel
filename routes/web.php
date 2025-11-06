@@ -6,17 +6,14 @@ use App\Http\Controllers\Auth_Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// Admin Route
-
-Route::get('/login', [LoginController::class, 'ShowLoginForm'])->name('login');
-
 Route::get('/', function () {
     return view('home_rsph');
 });
-// Route::middleware(['guest'])->group(function () {
 
-// });
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 
 Auth::routes();
 // admin role
@@ -34,4 +31,5 @@ Route::middleware(['IsAdministrator'])->group(function () {
 // Resepsionis role
 Route::middleware(['IsResepsionis'])->group(function () {
     Route::get('/resepsionis-dashboard', [ResepsionisController::class, 'index'])->name('resepsionis.index');
+    Route::get('/regis-pet', [ResepsionisController::class, 'regisPet'])->name('resepsionis.regis-pet');
 });
