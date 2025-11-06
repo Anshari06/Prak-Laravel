@@ -1,9 +1,10 @@
 @extends('layouts.resepsionis')
 
 @section('title', 'Resepsionis Dashboard')
-@section('page-heading', 'Resepsionis Dashboard')
+@section('page-heading', 'Dashboard')
 
 @section('content')
+
 	<div class="row">
 		<div class="col-md-8">
 			<div class="card mb-3">
