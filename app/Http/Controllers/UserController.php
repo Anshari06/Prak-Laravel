@@ -6,26 +6,21 @@ use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Validator;
+use App\Helper\customHelp;
 
 class UserController extends Controller
 {
-    protected function formatName($name)
-    {
-        return trim(ucwords(strtolower($name)));
-    }
-
     public function stored(Request $request)
     {
-        
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:user,email',
             'password' => 'required|confirmed',
         ]);
-        
+
         $user = User::create([
-            'nama' => $this->formatName($validated['name']),
+            'nama' => customHelp::formatName($validated['name']),
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
