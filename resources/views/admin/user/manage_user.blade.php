@@ -8,41 +8,81 @@
         <h2 class="mt-0 mb-2">Welcome</h2>
         <p class="mb-3">Your data is right here</p>
 
+        {{-- form add --}}
+
+        <div class="card mb-4 ">
+            <div class="card-header">
+                <strong>Add New User</strong>
+            </div>
+            <div class="card-body">
+                <div class="card-shadow">
+                    <form action="{{ route('admin.add_user') }}" method="POST" class="row g-3 p-3">
+                        @csrf
+
+                        @if ($errors->any())
+                            <div class="col-12">
+                                <div class="alert alert-danger p-2">
+                                    <ul class="mb-0 small">
+                                        @foreach ($errors->all() as $err)
+                                            <li>{{ $err }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
+
+                        <div class="col-md-4">
+                            <input type="text"
+                                class="form-control @error('name') is-invalid @enderror" name="name"
+                                placeholder="Name" value="{{ old('name') }}" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <input type="email"
+                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                placeholder="Email" value="{{ old('email') }}" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <input type="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                name="password" placeholder="Password" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <input type="password" class="form-control" name="password_confirmation"
+                                placeholder="Confirm Password" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <select class="form-select @error('idrole') is-invalid @enderror"
+                                name="idrole" required>
+                                <option value="" disabled selected>Select Role</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->idrole }}"
+                                        {{ old('idrole') == $role->idrole ? 'selected' : '' }}>
+                                        {{ $role->nama_role }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-primary">Add User</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="card mb-4">
             <div class="card-header">
                 <strong>Data Users</strong>
             </div>
 
-            {{-- form add --}}
-            <div class="container-fluid">
-                <form action="#" method="POST" class="row g-3 p-3">
-                    @csrf
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="name" placeholder="Name" required>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="password" class="form-control" name="password" placeholder="Password" required>
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select" name="role" required>
-                            <option value="" disabled selected>Select Role</option>
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->idrole }}">{{ $role->nama_role }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" class="btn btn-primary">Add User</button>
-                    </div>
-                </form>
-            </div>
-
             {{-- table --}}
             <div class="table-responsive">
-                <table class="table table-striped-hover mb-0">
+                <table class="table table-striped table-hover mb-0">
                     <thead class="table-light">
                         <tr>
                             <th style="width:70px">No</th>

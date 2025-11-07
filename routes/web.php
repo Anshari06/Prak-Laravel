@@ -1,14 +1,14 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ResepsionisController;
-use App\Http\Controllers\Auth_Controller;
+use App\Http\Controllers\Role\ResepsionisController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Role\DokterControll;
 use App\Http\Controllers\Role\AdminControl;
 use App\Http\Controllers\Role\Pemilik;
 use App\Http\Controllers\Role\Perawat;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('home_rsph');
@@ -23,7 +23,10 @@ Auth::routes();
 // admin role
 Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/admin-dashboard', [AdminControl::class, 'index'])->name('admin.index');
+    
     Route::get('/manage-user', [AdminControl::class, 'manageUsers'])->name('admin.manage_user');
+    Route::post('/add-user', [UserController::class, 'stored'])->name('admin.add_user');
+
     Route::get('/manage-pemilik', [AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
     Route::get('/manage-jenis', [AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');
     Route::get('/manage-pet', [AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\role;
+namespace App\Http\Controllers\Role;
 
 use App\Http\Controllers\Controller;
 use App\Models\detailRekam;
