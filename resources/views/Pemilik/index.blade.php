@@ -36,7 +36,7 @@
         <div class="card mt-4">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <h5 class="card-title">Data Pemilik</h5>
                         <p class="mb-1"><strong>Nama:</strong>
                             {{ $pemilik->user->name ?? (session('user_name') ?? '—') }}</p>
@@ -69,10 +69,9 @@
                                         @foreach ($pets as $pet)
                                             <tr>
                                                 <td>{{ $pet->nama ?? '—' }}</td>
-                                                <td>{{ $pet->jenis_hewan->nama_jenis_hewan ?? '—' }}
-                                                </td>
+                                                <td>{{ $pet->jenis_hewan->nama_jenis_hewan ?? '—' }}</td>
                                                 <td>{{ $pet->ras_hewan->nama_ras ?? '—' }}</td>
-                                                <td>{{ $pet->age ?? '—' }}</td>
+                                                <td>{{ !empty($pet->tanggal_lahir) ? \Carbon\Carbon::parse($pet->tanggal_lahir)->age . ' tahun' : '—' }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
