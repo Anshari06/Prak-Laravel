@@ -12,6 +12,35 @@
             <div class="card-header">
                 <strong>Data Users</strong>
             </div>
+
+            {{-- form add --}}
+            <div class="container-fluid">
+                <form action="#" method="POST" class="row g-3 p-3">
+                    @csrf
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select" name="role" required>
+                            <option value="" disabled selected>Select Role</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->idrole }}">{{ $role->nama_role }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary">Add User</button>
+                    </div>
+                </form>
+            </div>
+
+            {{-- table --}}
             <div class="table-responsive">
                 <table class="table table-striped-hover mb-0">
                     <thead class="table-light">
@@ -29,7 +58,15 @@
                                 <td>{{ $i + 1 }}</td>
                                 <td>{{ $user->nama ?? $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->nama_role ?? 'belum tersambung' }}</td>
+                                <td>
+                                    @forelse ($user->roleUser as $relasi)
+                                        {{ $relasi->role->nama_role }}
+                                        @if (!$loop->last)
+                                            ,
+                                        @endif @empty
+                                        -
+                                    @endforelse
+                                </td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
                                         <a class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
@@ -52,5 +89,6 @@
                 </table>
             </div>
         </div>
+    </div>
     </div>
 @endsection

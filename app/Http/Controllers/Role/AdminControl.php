@@ -32,7 +32,8 @@ class AdminControl extends Controller
     public function manageUsers()
     {
         $users = User::all();
-        return view('admin.user.manage_user', compact('users'));
+        $roles = Role::all();
+        return view('admin.user.manage_user', compact('users', 'roles'));
     }
 
     public function managePemilik()
