@@ -9,7 +9,6 @@
         <p class="mb-3">Your data is right here</p>
 
         {{-- form add --}}
-
         <div class="card mb-4 ">
             <div class="card-header">
                 <strong>Add New User</strong>
@@ -109,7 +108,8 @@
                                 </td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
-                                        <a class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
+                                        <a href="{{ route('admin.user.show', $user->iduser) }}"
+                                            class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
                                                 class="bi bi-eye fs-6"></i></a>
                                         <a class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
                                                 class="bi bi-pencil fs-6"></i></a>

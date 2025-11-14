@@ -33,7 +33,7 @@
                 icn="bi bi-house-door me-2">Dashboard</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage-user" :active="request()->is('manage-user')" icn="bi bi-people me-2">
+            <x-nav-link href="/manage-user" :active="request()->is('manage-user*')" icn="bi bi-people me-2">
                 Manage User</x-nav-link>
         </li>
         <li>
@@ -63,7 +63,8 @@
                 Daftar Kategori</x-nav-link>
         </li>
         <li>
-            <x-nav-link href="/manage-kategori-klinis" :active="request()->is('manage-kategori-klinis')" icn="bi bi-heart-pulse-fill me-2">
+            <x-nav-link href="/manage-kategori-klinis" :active="request()->is('manage-kategori-klinis')"
+                icn="bi bi-heart-pulse-fill me-2">
                 Daftar Kategori Klinis</x-nav-link>
         </li>
         <li>
@@ -79,7 +80,7 @@
             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="" width="32" height="32"
                 class="rounded-circle me-2">
-            <strong>{{ session('user_name') ?? (Auth::user()->nama ?? Auth::user()->name ?? 'User') }}</strong>
+            <strong>{{ session('user_name') ?? (Auth::user()->nama ?? (Auth::user()->name ?? 'User')) }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
             aria-labelledby="dropdownUser1" style="">
