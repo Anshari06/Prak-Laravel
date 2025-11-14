@@ -8,6 +8,8 @@
         <h2 class="mt-0 mb-2">Welcome</h2>
         <p class="mb-3">Your data is right here</p>
 
+        {{-- add form --}}
+
         {{-- Table: Daftar Jenis Hewan --}}
         <div class="card">
             <div class="card-header">

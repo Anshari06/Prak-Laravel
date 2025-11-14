@@ -34,6 +34,8 @@
                 @yield('content')
             </div>
         </div>
+
+        <x-footer />
     </main>
 
     <!-- Global JS -->
@@ -42,6 +44,8 @@
         crossorigin="anonymous"></script>
 
     @stack('scripts')
+
+
 </body>
 
 </html>
