@@ -24,10 +24,10 @@ Auth::routes();
 // admin role
 Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/admin-dashboard', [AdminControl::class, 'index'])->name('admin.index');
-
+    // crud
     Route::get('/manage-user', [AdminControl::class, 'manageUsers'])->name('admin.manage_user');
     Route::post('/add-user', [UserController::class, 'stored'])->name('admin.add_user');
-    
+
     Route::get('/manage-pemilik', [AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
     Route::post('/add-Pemilik', [PemilikController::class, 'stored'])->name('admin.add_pemilik');
 
@@ -53,8 +53,6 @@ Route::middleware(['IsDokter'])->group(function () {
 // Pemilik Role
 Route::middleware(['IsPemilik'])->group(function () {
     Route::get('/pemilik-dashboard', [Pemilik::class, 'index'])->name('pemilik.index');
-
-    
 });
 
 // perawat role
