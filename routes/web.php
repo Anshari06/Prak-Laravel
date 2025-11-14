@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\JenisHewanController;
 use App\Http\Controllers\PemilikController;
 use App\Http\Controllers\Role\ResepsionisController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,9 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::post('/add-Pemilik', [PemilikController::class, 'stored'])->name('admin.add_pemilik');
 
     Route::get('/manage-jenis', [AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');
+    Route::post('/add-jenis', [JenisHewanController::class, 'store'])->name('admin.add_jenis_hewan');
+    Route::delete('delete-jenis/{id}', [JenisHewanController::class, 'destroy'])->name('admin.delete_jenis_hewan');
+
     Route::get('/manage-pet', [AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');
     Route::get('/manage-role', [AdminControl::class, 'manageRoles'])->name('admin.role.manage_role');
     Route::get('/manage-kategori', [AdminControl::class, 'manageKategori'])->name('admin.tindakan.manage_kategori');
