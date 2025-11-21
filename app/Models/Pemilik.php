@@ -11,6 +11,7 @@ class Pemilik extends Model
     protected $fillable = [
         'alamat',
         'no_wa',
+        'iduser',
     ];
     public $timestamps = false;
 
@@ -23,6 +24,4 @@ class Pemilik extends Model
     {
         return $this->hasMany(Pet::class, 'idpemilik', 'idpemilik');
     }
-
-        
 }

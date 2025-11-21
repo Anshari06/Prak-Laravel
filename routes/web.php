@@ -31,7 +31,7 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/manage-user/{id}', [UserController::class, 'show'])->name('admin.user.show');
 
     Route::get('/manage-pemilik', [AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
-    Route::post('/add-Pemilik', [PemilikController::class, 'stored'])->name('admin.add_pemilik');
+    Route::post('/add-Pemilik', [PemilikController::class, 'store'])->name('admin.add_pemilik');
 
     Route::get('/manage-jenis', [AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');
     Route::post('/add-jenis', [JenisHewanController::class, 'store'])->name('admin.add_jenis_hewan');

@@ -9,31 +9,42 @@
         <p class="mb-3">Your data is right here</p>
 
         <div class="card mb-4">
-             <div class="card-header">
-                            <h5 class="mb-0">Form Tambah Pemilik</h5>
-                            <small class="text-muted">Isi data pemilik baru di form berikut.</small>
-                        </div>
+            <div class="card-header">
+                <h5 class="mb-0">Form Tambah Pemilik</h5>
+                <small class="text-muted">Isi data pemilik baru di form berikut.</small>
+            </div>
             <div class="card-body">
                 <div class="card-shadow">
-                    <form action=" {{ route ('admin.add_user')}} " method="POST" class="row g-3">
+                    <form action=" {{ route('admin.add_pemilik') }} " method="POST" class="row g-3">
                         @csrf
 
-                        <div class="col-md-3">
-                            <label for="iduser" class="form-label small">ID User</label>
-                            <input type="number" id="iduser"
-                                class="form-control @error('iduser') is-invalid @enderror"
-                                name="iduser" placeholder="ID User" value="{{ old('iduser') }}">
-                            @error('iduser')
+                        <div class="col-md-4">
+                            <label for="email" class="form-label small">Email</label>
+                            <input type="email" id="email"
+                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                placeholder="email@example.com" value="{{ old('email') }}">
+                            @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="col-md-4">
-                            <label for="nama" class="form-label small">Nama Pemilik</label>
-                            <input type="text" id="nama"
-                                class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                placeholder="Nama lengkap" value="{{ old('nama') }}">
-                            @error('nama')
+                            <label for="nama_pemilik" class="form-label small">Nama Pemilik</label>
+                            <input type="text" id="nama_pemilik"
+                                class="form-control @error('nama_pemilik') is-invalid @enderror"
+                                name="nama_pemilik" placeholder="Nama lengkap"
+                                value="{{ old('nama_pemilik') }}">
+                            @error('nama_pemilik')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="password" class="form-label small">Password</label>
+                            <input type="password" id="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                name="password" placeholder="Password" value="{{ old('password') }}">
+                            @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -64,6 +75,30 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="card-body-sm">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Terjadi kesalahan:</strong>
+                    <ul class="mb-0 mt-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
 
         <div class="card mb-4">
@@ -101,7 +136,8 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="btn btn-sm btn-danger p-1 px-2" title="Hapus"><i
+                                                class="btn btn-sm btn-danger p-1 px-2"
+                                                title="Hapus"><i
                                                     class="bi bi-trash fs-6"></i></button>
                                         </form>
                                     </div>
