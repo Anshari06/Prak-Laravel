@@ -81,4 +81,18 @@ class AdminControl extends Controller
         $tindakans = kat_tindakan::all();
         return view('admin.Tindakan.manage_tindakan', compact('tindakans'));
     }
+
+    public function manageDokter()
+    {
+        // for now return all users — later can filter by role
+        $dokters = User::all();
+        return view('admin.dokter.manage_dokter', compact('dokters'));
+    }
+
+    public function managePerawat()
+    {
+        // for now return all users — later can filter by role
+        $perawats = User::all();
+        return view('admin.perawat.manage_perawat', compact('perawats'));
+    }
 }

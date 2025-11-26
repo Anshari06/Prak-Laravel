@@ -38,7 +38,15 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::delete('delete-jenis/{id}', [JenisHewanController::class, 'destroy'])->name('admin.delete_jenis_hewan');
 
     Route::get('/manage-pet', [AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');
+    
     Route::get('/manage-role', [AdminControl::class, 'manageRoles'])->name('admin.role.manage_role');
+
+    Route::get('/manage-dokter', [AdminControl::class, 'manageDokter'])->name('admin.dokter.manage_dokter');
+    Route::post('add-dokter', [DokterControll::class, 'Store'])->name('admin.dokter.add_dokter');
+
+    Route::get('/manage-perawat', [AdminControl::class, 'managePerawat'])->name('admin.perawat.manage_perawat');
+    Route::post('add-perawat', [Perawat::class, 'Store'])->name('admin.perawat.add_perawat');
+
     Route::get('/manage-kategori', [AdminControl::class, 'manageKategori'])->name('admin.tindakan.manage_kategori');
     Route::get('/manage-kategori-klinis', [AdminControl::class, 'manageKat_klinis'])->name('admin.Klinis.manage_klinis');
     Route::get('/manage-tindakan', [AdminControl::class, 'manageKat_tindakan'])->name('admin.kategori.manage_tindakan');

@@ -45,6 +45,14 @@
                 Manage Pemilik</x-nav-link>
         </li>
         <li>
+            <x-nav-link href="/manage-dokter" :active="request()->is('manage-dokter*')" icn="bi bi-person-badge me-2">
+                Manage Dokter</x-nav-link>
+        </li>
+        <li>
+            <x-nav-link href="/manage-perawat" :active="request()->is('manage-perawat*')" icn="bi bi-person me-2">
+                Manage Perawat</x-nav-link>
+        </li>
+        <li>
             <x-nav-link href="/manage-jenis" :active="request()->is('manage-jenis')" icn="bx bxs-paw-print me-2">
                 Manage Jenis Hewan</x-nav-link>
         </li>
