@@ -24,7 +24,6 @@ class DokterControll extends Controller
             $totalRekamMedis = $rekamMedis->count();
         }
 
-
         return view('Dokter.index', compact('rekamMedis', 'totalRekamMedis'));
     }
 }

@@ -11,6 +11,7 @@ use App\Models\Pet;
 use App\Models\Pemilik;
 use App\Models\Role;
 use App\Models\Categories;
+use App\Models\Dokter;
 use App\Models\ras_hewan;
 
 class AdminControl extends Controller
@@ -84,8 +85,8 @@ class AdminControl extends Controller
 
     public function manageDokter()
     {
-        // for now return all users — later can filter by role
-        $dokters = User::all();
+        // return dokter with related user to display names without N+1
+        $dokters = Dokter::with('user')->get();
         return view('admin.dokter.manage_dokter', compact('dokters'));
     }
 

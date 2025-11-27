@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JenisHewanController;
 use App\Http\Controllers\PemilikController;
 use App\Http\Controllers\Role\ResepsionisController;
@@ -42,7 +43,8 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/manage-role', [AdminControl::class, 'manageRoles'])->name('admin.role.manage_role');
 
     Route::get('/manage-dokter', [AdminControl::class, 'manageDokter'])->name('admin.dokter.manage_dokter');
-    Route::post('add-dokter', [DokterControll::class, 'Store'])->name('admin.dokter.add_dokter');
+    Route::post('add-dokter', [DokterController::class, 'store'])->name('admin.dokter.add_dokter');
+    Route::delete('delete-dokter/{id}', [DokterController::class, 'destroy'])->name('admin.dokter.delete_dokter');
 
     Route::get('/manage-perawat', [AdminControl::class, 'managePerawat'])->name('admin.perawat.manage_perawat');
     Route::post('add-perawat', [Perawat::class, 'Store'])->name('admin.perawat.add_perawat');

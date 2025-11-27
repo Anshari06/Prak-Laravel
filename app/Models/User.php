@@ -57,4 +57,9 @@ class User extends Authenticatable
         // RoleUser is the pivot/association model (role_user table)
         return $this->hasMany(RoleUser::class, 'iduser', 'iduser');
     }
+
+    public function Dokter()
+    {
+        return $this->hasOne(Dokter::class, 'id_user', 'iduser');
+    }
 }

@@ -10,11 +10,6 @@ use App\Models\RoleUser;
 
 class PemilikController extends Controller
 {
-    public function index()
-    {
-        $pemiliks = Pemilik::all();
-        return view('admin.pemilik.manage_pemilik', compact('pemiliks'));
-    }
 
     public function store(Request $request)
     {
