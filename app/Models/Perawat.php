@@ -13,7 +13,7 @@ class Perawat extends Model
         'pendidikan',
         'jenis_kelamin',
         'alamat',
-        'iduser',
+        'id_user',
     ];
     public $timestamps = false;
 

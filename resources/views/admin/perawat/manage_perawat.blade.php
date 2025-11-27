@@ -120,6 +120,7 @@
                             <th>Nama</th>
                             <th>No. WA</th>
                             <th>Alamat</th>
+                            <th>Pendidikan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -131,6 +132,7 @@
                                 <td>{{ $perawat->user->nama ?? '-' }}</td>
                                 <td>{{ $perawat->no_hp ?? '-' }}</td>
                                 <td>{{ $perawat->alamat ?? '-' }}</td>
+                                <td>{{ $perawat->pendidikan ?? '-' }}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
                                         <a href="#" class="btn btn-sm btn-info p-1 px-2"

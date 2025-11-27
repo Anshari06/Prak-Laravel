@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\customHelp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -9,6 +10,8 @@ use App\Models\Perawat;
 use App\Models\User;
 use App\Models\RoleUser;
 use App\Models\Role;
+use PHPUnit\TextUI\Help;
+use Symfony\Component\Console\Helper\Helper;
 
 class PerawatController extends Controller
 {
@@ -19,7 +22,7 @@ class PerawatController extends Controller
             'nama_perawat' => 'required|string|max:255',
             'password' => 'required',
             'alamat' => 'required|string|max:500',
-            'no_wa' => 'required|string|max:15',
+            'no_wa' => 'required|integer|max:18',
             'pendidikan' => 'required|string|max:100',
             'jenis_kelamin' => 'required|in:L,P',
         ]);
@@ -31,7 +34,7 @@ class PerawatController extends Controller
             $user = User::create([
                 'email' => $validatedData['email'],
                 'password' => Hash::make($validatedData['password']),
-                'nama' => $validatedData['nama_perawat'],
+                'nama' => customHelp::formatName($validatedData['nama_perawat']),
             ]);
 
             // assign role id for perawat
