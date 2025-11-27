@@ -11,6 +11,7 @@ use App\Http\Controllers\Role\DokterControll;
 use App\Http\Controllers\Role\AdminControl;
 use App\Http\Controllers\Role\Pemilik;
 use App\Http\Controllers\Role\Perawat;
+use App\Http\Controllers\PerawatController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
@@ -39,7 +40,7 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::delete('delete-jenis/{id}', [JenisHewanController::class, 'destroy'])->name('admin.delete_jenis_hewan');
 
     Route::get('/manage-pet', [AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');
-    
+
     Route::get('/manage-role', [AdminControl::class, 'manageRoles'])->name('admin.role.manage_role');
 
     Route::get('/manage-dokter', [AdminControl::class, 'manageDokter'])->name('admin.dokter.manage_dokter');
@@ -47,7 +48,7 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::delete('delete-dokter/{id}', [DokterController::class, 'destroy'])->name('admin.dokter.delete_dokter');
 
     Route::get('/manage-perawat', [AdminControl::class, 'managePerawat'])->name('admin.perawat.manage_perawat');
-    Route::post('add-perawat', [Perawat::class, 'Store'])->name('admin.perawat.add_perawat');
+    Route::post('add-perawat', [PerawatController::class, 'store'])->name('admin.perawat.add_perawat');
 
     Route::get('/manage-kategori', [AdminControl::class, 'manageKategori'])->name('admin.tindakan.manage_kategori');
     Route::get('/manage-kategori-klinis', [AdminControl::class, 'manageKat_klinis'])->name('admin.Klinis.manage_klinis');

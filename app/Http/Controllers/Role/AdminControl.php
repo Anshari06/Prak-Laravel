@@ -13,6 +13,7 @@ use App\Models\Role;
 use App\Models\Categories;
 use App\Models\Dokter;
 use App\Models\ras_hewan;
+use App\Models\Perawat;
 
 class AdminControl extends Controller
 {
@@ -93,7 +94,7 @@ class AdminControl extends Controller
     public function managePerawat()
     {
         // for now return all users — later can filter by role
-        $perawats = User::all();
+        $perawats = Perawat::all();
         return view('admin.perawat.manage_perawat', compact('perawats'));
     }
 }
