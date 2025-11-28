@@ -26,4 +26,21 @@ class DokterControll extends Controller
 
         return view('Dokter.index', compact('rekamMedis', 'totalRekamMedis'));
     }
+
+    public function rekam()
+    {
+        // prefer the role-user pivot id stored in session (idrole_user)
+        $roleUserId = session('user_role_id');
+        if (empty($roleUserId) && Auth::check()) {
+            $roleUserId = optional(optional(Auth::user()->roleUser)[0])->idrole_user ?? null;
+        }
+
+        if (empty($roleUserId)) {
+            $rekamMedis = collect();
+        } else {
+            $rekamMedis = RekamMedis::where('dokter_pemeriksa', $roleUserId)->get();
+        }
+
+        return view('Dokter.rekam.rekam', compact('rekamMedis'));
+    }
 }

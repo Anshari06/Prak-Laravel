@@ -63,7 +63,8 @@ Route::middleware(['IsResepsionis'])->group(function () {
 // Dokter Role
 Route::middleware(['IsDokter'])->group(function () {
     Route::get('/dokter-dashboard', [DokterControll::class, 'index'])->name('dokter.index');
-    Route::get('/dokter/rekam', [DokterControll::class, 'index'])->name('dokter.rekam.rekam');
+    Route::get('/dokter/rekam', [DokterControll::class, 'rekam'])->name('dokter.rekam.rekam');
+    Route::get('/dokter/rekam/{id}', [DokterControll::class, 'show'])->name('dokter.rekam.show');
 });
 
 // Pemilik Role

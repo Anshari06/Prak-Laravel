@@ -12,8 +12,18 @@ class detailRekam extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'anamnesa',
-        'temuan_klinis',
-        'diagnosa',
+        'idrekam_medis',
+        'idkode_tindakan_terapi',
+        'detail',
     ];
+
+    public function rekamMedis()
+    {
+        return $this->belongsTo(RekamMedis::class, 'idrekam_medis', 'idrekam_medis');
+    }
+    
+    public function katTindakan()
+    {
+        return $this->belongsTo(kat_tindakan::class, 'idkode_tindakan_terapi', 'idkode_tindakan_terapi');
+    }
 }

@@ -24,6 +24,11 @@ class RekamMedis extends Model
         return $this->belongsTo(Pet::class, 'idpet', 'idpet');
     }
 
+    public function detailRekams()
+    {
+        return $this->hasMany(detailRekam::class, 'idrekam_medis', 'idrekam_medis');
+    }
+
     public function dokter()
     {
         return $this->belongsTo(User::class, 'dokter_pemeriksa', 'idrole_user');

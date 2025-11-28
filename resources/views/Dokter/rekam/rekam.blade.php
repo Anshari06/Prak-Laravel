@@ -1,4 +1,4 @@
-@extends('layouts.dokter')
+@extends('layouts.admin')
 
 @section('title', 'Dokter Dashboard')
 @section('page-heading', 'Dashboard')
@@ -9,36 +9,38 @@
     </div>
 
     <div class="container-fluid p-3">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <strong>Data Rekam Medis</strong>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped mb-0">
-                        <thead class="table-light">
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Data Rekam Medis</strong>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:70px">#</th>
+                            <th>Tanggal</th>
+                            <th>Nama Pet</th>
+                            <th>Temuan Klinis</th>
+                            <th>Diagnosa</th>
+                            <th>Tindakan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($rekamMedis as $i => $rekam)
                             <tr>
-                                <th style="width:70px">#</th>
-                                <th>Tanggal</th>
-                                <th>Nama Pet</th>
-                                <th>Temuan Klinis</th>
-                                <th>Diagnosa</th>
-                                <th>Tindakan</th>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $rekam->created_at ?? '-' }}</td>
+                                <td>{{ $rekam->pet->nama ?? '-' }}</td>
+                                <td>{{ $rekam->temuan_klinis ?? '-' }}</td>
+                                <td>{{ $rekam->diagnosa ?? '-' }}</td>
+                                <td>
+                                    <a href="{{ route('dokter.rekam.show', $rekam->idrekam_medis) }}" class="btn btn-sm btn-primary">Lihat Detail</a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($rekamMedis as $i => $rekam)
-                                <tr>
-                                    <td>{{ $i + 1 }}</td>
-                                    <td>{{ $rekam->created_at ?? '-' }}</td>
-                                    <td>{{ $rekam->pet->nama ?? '-' }}</td>
-                                    <td>{{ $rekam->temuan_klinis ?? '-' }}</td>
-                                    <td>{{ $rekam->diagnosa ?? '-' }}</td>
-                                    <td>{{ $rekam->tindakan ?? '-' }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-@endsection        
+    </div>
+@endsection

@@ -10,7 +10,6 @@
 
         <div class="container-fluid mt-3">
             <div class="row g-3">
-
                 <div class="col-6 col-md-3">
                     <div class="card shadow-sm">
                         <div class="card-body d-flex align-items-center">
@@ -39,7 +38,6 @@
                                 <th>Nama Pet</th>
                                 <th>Temuan Klinis</th>
                                 <th>Diagnosa</th>
-                                <th>Tindakan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +48,6 @@
                                     <td>{{ $rekam->pet->nama ?? '-' }}</td>
                                     <td>{{ $rekam->temuan_klinis ?? '-' }}</td>
                                     <td>{{ $rekam->diagnosa ?? '-' }}</td>
-                                    <td>{{ $rekam->tindakan ?? '-' }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -24,4 +24,9 @@ class kat_tindakan extends Model
     {
         return $this->belongsTo(Kat_Klinis::class, 'idkategori_klinis', 'idkategori_klinis');
     }
+
+    public function detailRekams()
+    {
+        return $this->hasMany(detailRekam::class, 'idkode_tindakan_terapi', 'idkode_tindakan_terapi');
+    }
 }
