@@ -1,4 +1,4 @@
-@extends('layouts.pemilik')
+@extends('layouts.admin')
 @section('title', 'Pemilik Dashboard')
 @section('page-heading', 'Dashboard')
 
