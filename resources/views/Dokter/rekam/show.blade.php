@@ -17,7 +17,8 @@
                         <p class="mb-1"><strong>Nama:</strong> {{ optional($rekam->pet)->nama ?? '-' }}
                         </p>
                         <p class="mb-1"><strong>Owner:</strong>
-                            {{ optional(optional(optional($rekam->pet)->pemilik)->user)->nama ?? '-' }}</p>
+                            {{ optional(optional(optional($rekam->pet)->pemilik)->user)->nama ?? '-' }}
+                        </p>
                         <p class="mb-1"><strong>Jenis:</strong>
                             {{ optional(optional(optional($rekam->pet)->ras_hewan)->jenisHewan)->nama_jenis_hewan ?? '-' }}
                         </p>
