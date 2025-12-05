@@ -59,6 +59,8 @@ Route::middleware(['IsResepsionis'])->group(function () {
     Route::get('/resepsionis-dashboard', [ResepsionisController::class, 'index'])->name('resepsionis.index');
     Route::get('/regis-pet', [ResepsionisController::class, 'regisPet'])->name('resepsionis.regis-pet');
     Route::post('/regis-pet', [ResepsionisController::class, 'storePet'])->name('resepsionis.regis-pet.store');
+    Route::get('/regis-pemilik', [ResepsionisController::class, 'regisPemilik'])->name('resepsionis.regis-pemilik');
+    Route::post('/regis-pemilik', [ResepsionisController::class, 'storePemilik'])->name('resepsionis.regis-pemilik.store');
 });
 
 // Dokter Role
