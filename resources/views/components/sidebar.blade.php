@@ -132,7 +132,29 @@
             </li>
         </ul>
     @elseif (session('user_role') == 4)
-
+        <ul class="nav nav-pills flex-column mb-auto resepsionis-nav">
+            <li class="nav-item">
+                <x-nav-link href="/resepsionis-dashboard" :active="request()->is('resepsionis-dashboard')"
+                    icn="bi bi-house-door me-2">
+                    Dashboard
+                </x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link href="/regis-pet" :active="request()->is('regis-pet')" icn="bi bi-clipboard2-plus me-2">
+                    Registrasi Pet
+                </x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link href="/regis-pemilik" :active="request()->is('regis-pemilik')" icn="bi bi-person-plus me-2">
+                    Registrasi Pemilik
+                </x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link href="/temu-dokter" :active="request()->is('temu-dokter')" icn="bi bi-clipboard-data me-2">
+                    Temu Dokter
+                </x-nav-link>
+            </li>
+        </ul>
     @elseif (session('user_role') == 5)
     @endif
     <hr>

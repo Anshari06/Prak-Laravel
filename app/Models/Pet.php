@@ -10,11 +10,16 @@ class Pet extends Model
     protected $primaryKey = 'idpet';
 
     protected $fillable = [
-        'name',
-        'age',
+        'nama',
+        'tanggal_lahir',
+        'warna_tanda',
+        'jenis_kelamin',
+        'idpemilik',
         'idras_hewan',
         'description',
     ];
+
+    public $timestamps = false;
 
     public function ras_hewan()
     {
