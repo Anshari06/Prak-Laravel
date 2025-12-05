@@ -25,4 +25,14 @@ class Temu_dokter extends Model
     public function role_user(){
         return $this->belongsTo(RoleUser::class, 'idrole_user', 'idrole_user');
     }
+
+    public function rekam_medis()
+    {
+        return $this->hasMany(RekamMedis::class, 'idreservasi_dokter', 'idreservasi');
+    }
+
+    public function pet()
+    {
+        return $this->hasManyThrough(Pet::class, 'idpet', 'idpet');
+    }
 }

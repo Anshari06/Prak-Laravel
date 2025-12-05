@@ -24,6 +24,11 @@ class detailRekam extends Model
     
     public function katTindakan()
     {
-        return $this->belongsTo(kat_tindakan::class, 'idkode_tindakan_terapi', 'idkode_tindakan_terapi');
+        return $this->hasMany(kat_tindakan::class, 'idkode_tindakan_terapi', 'idkode_tindakan_terapi');
+    }
+
+    public function temudokter()
+    {
+        return $this->belongsTo(User::class, 'dokter_pemeriksa', 'idrole_user');
     }
 }

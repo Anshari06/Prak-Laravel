@@ -27,6 +27,6 @@ class kat_tindakan extends Model
 
     public function detailRekams()
     {
-        return $this->hasMany(detailRekam::class, 'idkode_tindakan_terapi', 'idkode_tindakan_terapi');
+        return $this->belongsToMany(detailRekam::class, 'idkode_tindakan_terapi', 'idkode_tindakan_terapi');
     }
 }

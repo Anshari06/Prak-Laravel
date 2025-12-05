@@ -1,4 +1,4 @@
-@extends('layouts.dokter')
+@extends('layouts.admin')
 
 @section('title', 'Dokter Dashboard')
 @section('page-heading', 'Dashboard')

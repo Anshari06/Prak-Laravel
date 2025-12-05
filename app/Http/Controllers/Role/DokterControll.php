@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Role;
 
 use App\Http\Controllers\Controller;
+use App\Models\detailRekam;
 use Illuminate\Http\Request;
 use App\Models\RekamMedis;
 use Illuminate\Support\Facades\Auth;
@@ -42,5 +43,21 @@ class DokterControll extends Controller
         }
 
         return view('Dokter.rekam.rekam', compact('rekamMedis'));
+    }
+
+    public function show($id)
+    {
+        $rekam = RekamMedis::with([
+            'pet.pemilik.user',
+            'pet.ras_hewan.jenisHewan',
+            'dokter.user',
+        ])
+            ->first();
+
+        $detail = detailRekam::where('idrekam_medis', $id)
+        ->with('katTindakan')
+        ->get();
+            
+        return view('Dokter.rekam.show', compact('rekam', 'detail'));
     }
 }
