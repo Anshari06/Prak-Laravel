@@ -18,6 +18,7 @@
         display: none;
         /* Chrome, Safari and Opera */
     }
+
     /* Make horizontal separators visible on dark background */
     /* .sidebar-scroll hr {
         border: none;
@@ -27,6 +28,7 @@
     } */
 </style>
 {{-- icon --}}
+
 <head>
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -116,7 +118,19 @@
             </li>
         </ul>
     @elseif (session('user_role') == 3)
-
+        <ul class="nav nav-pills flex-column mb-auto perawat-nav">
+            <li class="nav-item">
+                <x-nav-link href="/perawat-dashboard" :active="request()->is('perawat-dashboard')"
+                    icn="bi bi-house-door me-2">
+                    Dashboard
+                </x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link href="/perawat-rekam" :active="request()->is('perawat-rekam*')" icn="bi bi-activity me-2">
+                    Detail Rekam Medis
+                </x-nav-link>
+            </li>
+        </ul>
     @elseif (session('user_role') == 4)
 
     @elseif (session('user_role') == 5)

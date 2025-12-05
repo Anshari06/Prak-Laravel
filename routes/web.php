@@ -75,5 +75,12 @@ Route::middleware(['IsPemilik'])->group(function () {
 // perawat role
 Route::middleware(['IsPerawat'])->group(function () {
     Route::get('/perawat-dashboard', [Perawat::class, 'index'])->name('perawat.index');
-    Route::get('/detail-rekam', [Perawat::class, 'detail'])->name('perawat.detail_rekam');
+    Route::get('/perawat-rekam', [Perawat::class, 'rekam'])->name('perawat.rekam');
+    // create / store must be registered before the parameterized {id} route
+    Route::get('/perawat-rekam/create', [Perawat::class, 'create'])->name('perawat.rekam.create');
+    Route::post('/perawat-rekam', [Perawat::class, 'store'])->name('perawat.rekam.store');
+    // show / edit / update for a specific rekam
+    Route::get('/perawat-rekam/{id}', [Perawat::class, 'show'])->name('perawat.rekam.show');
+    Route::get('/perawat-rekam/{id}/edit', [Perawat::class, 'edit'])->name('perawat.rekam.edit');
+    Route::put('/perawat-rekam/{id}', [Perawat::class, 'update'])->name('perawat.rekam.update');
 });

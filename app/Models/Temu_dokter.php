@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Temu_dokter extends Model
 {
     protected $table = 'temu_dokter';
-    protected $primaryKey = 'idreservasi';
+    protected $primaryKey = 'idreservasi_dokter';
     protected $fillable = [
-        'id_pemilik',
-        'id_dokter',
-        'tanggal_temu',
-        'waktu_temu',
-        'status_temu',
+        'idpet',
+        'no_urut',
+        'idrole_user',
+        'status',
+        'waktu_daftar',
     ];
     public $timestamps = false;
 
     public function pemilik()
     {
-        return $this->belongsTo(Pemilik::class, 'id_pemilik', 'idpemilik');
+        return $this->belongsToMany(Pemilik::class, 'id_pemilik', 'idpemilik');
     }
 
     public function role_user(){
@@ -33,6 +33,7 @@ class Temu_dokter extends Model
 
     public function pet()
     {
-        return $this->hasManyThrough(Pet::class, 'idpet', 'idpet');
+        // A reservation belongs to a single pet (if your schema stores `idpet` on `temu_dokter`)
+        return $this->belongsTo(Pet::class, 'idpet', 'idpet');
     }
 }
