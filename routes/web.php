@@ -34,6 +34,9 @@ Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/manage-user', [AdminControl::class, 'manageUsers'])->name('admin.manage_user');
     Route::post('/add-user', [UserController::class, 'stored'])->name('admin.add_user');
     Route::get('/manage-user/{id}', [UserController::class, 'show'])->name('admin.user.show');
+    Route::get('/manage-user/{id}/edit', [UserController::class, 'edit'])->name('admin.user.edit');
+    Route::put('/manage-user/{id}', [UserController::class, 'update'])->name('admin.user.update');
+    Route::delete('/manage-user/{id}', [UserController::class, 'destroy'])->name('admin.user.destroy');
 
     Route::get('/manage-pemilik', [AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
     Route::post('/add-Pemilik', [PemilikController::class, 'store'])->name('admin.add_pemilik');

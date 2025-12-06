@@ -39,7 +39,12 @@
                             <div class="mt-3">
                                 <a href="{{ route('admin.manage_user') }}"
                                     class="btn btn-outline-secondary">← Back</a>
-                                <a href="#" class="btn btn-primary ms-2">Edit</a>
+                                    <a href="{{ route('admin.user.edit', $user->iduser) }}" class="btn btn-primary ms-2">Edit</a>
+                                    <form action="{{ route('admin.user.destroy', $user->iduser) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus user ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger ms-2">Delete</button>
+                                    </form>
                             </div>
                         </div>
                     </div>

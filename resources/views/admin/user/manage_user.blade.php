@@ -111,7 +111,7 @@
                                         <a href="{{ route('admin.user.show', $user->iduser) }}"
                                             class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
                                                 class="bi bi-eye fs-6"></i></a>
-                                        <a class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
+                                        <a href="{{ route('admin.user.edit', $user->iduser) }}" class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
                                                 class="bi bi-pencil fs-6"></i></a>
                                         <form method="POST" class="d-inline"
                                             onsubmit="return confirm('Yakin ingin menghapus?')">

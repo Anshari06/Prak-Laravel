@@ -11,6 +11,68 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    public function edit($id)
+    {
+        $user = DB::table('user')->where('iduser', $id)->first();
+        $pemilik = DB::table('pemilik')->where('iduser', $id)->first();
+
+        // Fetch all available roles
+        $allRoles = DB::table('role')->get();
+
+        // Fetch user's current roles
+        $userRoles = DB::table('role_user')
+            ->where('iduser', $id)
+            ->pluck('idrole')
+            ->toArray();
+
+        return view('admin.user.edit', compact('user', 'pemilik', 'allRoles', 'userRoles'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'alamat' => 'nullable|string|max:255',
+            'no_wa' => 'nullable|string|max:50',
+            'roles' => 'nullable|array',
+            'roles.*' => 'exists:role,idrole',
+        ]);
+
+        // Update user table
+        DB::table('user')->where('iduser', $id)->update([
+            'nama' => customHelp::formatName($validated['nama']),
+            'email' => $validated['email'],
+        ]);
+
+        // Update or insert pemilik table if exists
+        $pemilik = DB::table('pemilik')->where('iduser', $id)->first();
+        if ($pemilik) {
+            DB::table('pemilik')->where('iduser', $id)->update([
+                'alamat' => $validated['alamat'],
+                'no_wa' => $validated['no_wa'],
+            ]);
+        }
+
+        // Update user roles
+        if (isset($validated['roles'])) {
+            // Delete existing roles
+            DB::table('role_user')->where('iduser', $id)->delete();
+
+            // Insert new roles
+            foreach ($validated['roles'] as $roleId) {
+                DB::table('role_user')->insert([
+                    'iduser' => $id,
+                    'idrole' => $roleId,
+                    'status' => 1, // default active
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.user.show', $id)->with('success', 'User berhasil diupdate.');
+    }
+
     public function stored(Request $request)
     {
 
