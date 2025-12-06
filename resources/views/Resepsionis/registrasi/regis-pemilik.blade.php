@@ -76,6 +76,7 @@
                         <th>Nama Pemilik</th>
                         <th>No. WA</th>
                         <th>Alamat</th>
+                        <th style="width:100px">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -86,6 +87,22 @@
                             <td>{{ $pemilik->user->nama ?? '-' }}</td>
                             <td>{{ $pemilik->no_wa ?? '-' }}</td>
                             <td>{{ $pemilik->alamat ?? '-' }}</td>
+                            <td>
+                                <a href="{{ route('resepsionis.regis-pemilik.edit', $pemilik->idpemilik) }}"
+                                    class="btn btn-sm btn-warning p-1 px-2" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form method="POST" class="d-inline"
+                                    action="{{ route('resepsionis.regis-pemilik.delete', $pemilik->idpemilik) }}"
+                                    onsubmit="return confirm('Yakin ingin menghapus pemilik ini? Data terkait akan dihapus juga.')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger p-1 px-2"
+                                        title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

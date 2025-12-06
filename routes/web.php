@@ -59,8 +59,16 @@ Route::middleware(['IsResepsionis'])->group(function () {
     Route::get('/resepsionis-dashboard', [ResepsionisController::class, 'index'])->name('resepsionis.index');
     Route::get('/regis-pet', [ResepsionisController::class, 'regisPet'])->name('resepsionis.regis-pet');
     Route::post('/regis-pet', [ResepsionisController::class, 'storePet'])->name('resepsionis.regis-pet.store');
+    Route::get('/regis-pet/{id}/edit', [ResepsionisController::class, 'editPet'])->name('resepsionis.regis-pet.edit');
+    Route::put('/regis-pet/{id}', [ResepsionisController::class, 'updatePet'])->name('resepsionis.regis-pet.update');
+    Route::delete('/regis-pet/{id}', [ResepsionisController::class, 'deletePet'])->name('resepsionis.regis-pet.delete');
+
     Route::get('/regis-pemilik', [ResepsionisController::class, 'regisPemilik'])->name('resepsionis.regis-pemilik');
     Route::post('/regis-pemilik', [ResepsionisController::class, 'storePemilik'])->name('resepsionis.regis-pemilik.store');
+    Route::get('/regis-pemilik/{id}/edit', [ResepsionisController::class, 'editPemilik'])->name('resepsionis.regis-pemilik.edit');
+    Route::put('/regis-pemilik/{id}', [ResepsionisController::class, 'updatePemilik'])->name('resepsionis.regis-pemilik.update');
+    Route::delete('/regis-pemilik/{id}', [ResepsionisController::class, 'deletePemilik'])->name('resepsionis.regis-pemilik.delete');
+
     Route::get('/temu-dokter', [ResepsionisController::class, 'temuDokter'])->name('resepsionis.temu.index');
     Route::get('/temu-dokter/create', [ResepsionisController::class, 'createTemuDokter'])->name('resepsionis.temu.create');
     Route::post('/temu-dokter', [ResepsionisController::class, 'storeTemuDokter'])->name('resepsionis.temu.store');

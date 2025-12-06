@@ -40,9 +40,11 @@
                     <label class="form-label">Jenis Kelamin</label>
                     <select name="jenis_kelamin" class="form-select">
                         <option value="">-- Pilih --</option>
-                        <option value="J" {{ old('jenis_kelamin') == 'J' ? 'selected' : '' }}>Jantan
+                        <option value="J" {{ old('jenis_kelamin') == 'J' ? 'selected' : '' }}>
+                            Jantan
                         </option>
-                        <option value="B" {{ old('jenis_kelamin') == 'B' ? 'selected' : '' }}>Betina
+                        <option value="B" {{ old('jenis_kelamin') == 'B' ? 'selected' : '' }}>
+                            Betina
                         </option>
                     </select>
                 </div>
@@ -54,7 +56,8 @@
                             @foreach ($pemiliks as $p)
                                 <option value="{{ $p->idpemilik }}"
                                     {{ old('idpemilik') == $p->idpemilik ? 'selected' : '' }}>
-                                    {{ optional($p->user)->nama ?? 'Pemilik#' . $p->idpemilik }}</option>
+                                    {{ optional($p->user)->nama ?? 'Pemilik#' . $p->idpemilik }}
+                                </option>
                             @endforeach
                         @endif
                     </select>
@@ -91,7 +94,9 @@
                             <th>Nama Hewan</th>
                             <th>Ras Hewan</th>
                             <th>Jenis Hewan</th>
+                            <th>Jenis Kelamin</th>
                             <th>Nama Pemilik</th>
+                            <th style="width:100px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,7 +107,25 @@
                                 <td>{{ optional($pet->ras_hewan)->nama_ras ?? '-' }}</td>
                                 <td>{{ optional(optional($pet->ras_hewan)->jenisHewan)->nama_jenis_hewan ?? '-' }}
                                 </td>
+                                <td>{{ $pet->jenis_kelamin == 'J' ? 'Jantan' : ($pet->jenis_kelamin == 'B' ? 'Betina' : '-') }}
+                                </td>
                                 <td>{{ optional(optional($pet->pemilik)->user)->nama ?? '-' }}</td>
+                                <td>
+                                    <a href="{{ route('resepsionis.regis-pet.edit', $pet->idpet) }}"
+                                        class="btn btn-sm btn-warning p-1 px-2" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form method="POST" class="d-inline"
+                                        action="{{ route('resepsionis.regis-pet.delete', $pet->idpet) }}"
+                                        onsubmit="return confirm('Yakin ingin menghapus pet ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger p-1 px-2"
+                                            title="Hapus">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

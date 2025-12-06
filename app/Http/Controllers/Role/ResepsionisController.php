@@ -165,4 +165,116 @@ class ResepsionisController extends Controller
 
         return redirect()->route('resepsionis.regis-pet')->with('success', 'Pet berhasil didaftarkan.');
     }
+
+    public function editPet($id)
+    {
+        $pet = Pet::find($id);
+        if (!$pet) {
+            return redirect()->route('resepsionis.regis-pet')->with('error', 'Pet tidak ditemukan.');
+        }
+
+        $pemiliks = Pemilik::with('user')->get();
+        $ras = \App\Models\ras_hewan::all();
+
+        return view('resepsionis.registrasi.edit-pet', compact('pet', 'pemiliks', 'ras'));
+    }
+
+    public function updatePet(Request $request, $id)
+    {
+        $pet = Pet::find($id);
+        if (!$pet) {
+            return redirect()->route('resepsionis.regis-pet')->with('error', 'Pet tidak ditemukan.');
+        }
+
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'warna_tanda' => 'required|string|max:255',
+            'jenis_kelamin' => 'required|in:J,B',
+            'idpemilik' => 'required|exists:pemilik,idpemilik',
+            'idras_hewan' => 'required|exists:ras_hewan,idras_hewan',
+        ]);
+
+        $pet->update($validated);
+
+        return redirect()->route('resepsionis.regis-pet')->with('success', 'Pet berhasil diperbarui.');
+    }
+
+    public function deletePet($id)
+    {
+        $pet = Pet::find($id);
+        if (!$pet) {
+            return redirect()->route('resepsionis.regis-pet')->with('error', 'Pet tidak ditemukan.');
+        }
+
+        $pet->delete();
+        return redirect()->route('resepsionis.regis-pet')->with('success', 'Pet berhasil dihapus.');
+    }
+
+    public function editPemilik($id)
+    {
+        $pemilik = Pemilik::with('user')->find($id);
+        if (!$pemilik) {
+            return redirect()->route('resepsionis.regis-pemilik')->with('error', 'Pemilik tidak ditemukan.');
+        }
+
+        return view('resepsionis.registrasi.edit-pemilik', compact('pemilik'));
+    }
+
+    public function updatePemilik(Request $request, $id)
+    {
+        $pemilik = Pemilik::with('user')->find($id);
+        if (!$pemilik) {
+            return redirect()->route('resepsionis.regis-pemilik')->with('error', 'Pemilik tidak ditemukan.');
+        }
+
+        $validatedData = $request->validate([
+            'nama_pemilik' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
+            'no_wa' => 'required|string|max:15',
+        ]);
+
+        // Update user
+        $pemilik->user->update([
+            'nama' => $validatedData['nama_pemilik'],
+        ]);
+
+        // Update pemilik
+        $pemilik->update([
+            'alamat' => $validatedData['alamat'],
+            'no_wa' => $validatedData['no_wa'],
+        ]);
+
+        return redirect()->route('resepsionis.regis-pemilik')->with('success', 'Pemilik berhasil diperbarui.');
+    }
+
+    public function deletePemilik($id)
+    {
+        $pemilik = Pemilik::find($id);
+        if (!$pemilik) {
+            return redirect()->route('resepsionis.regis-pemilik')->with('error', 'Pemilik tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete related pets first
+            Pet::where('idpemilik', $pemilik->idpemilik)->delete();
+
+            // Delete role_user
+            RoleUser::where('iduser', $pemilik->iduser)->delete();
+
+            // Delete user
+            User::where('iduser', $pemilik->iduser)->delete();
+
+            // Delete pemilik
+            $pemilik->delete();
+
+            DB::commit();
+            return redirect()->route('resepsionis.regis-pemilik')->with('success', 'Pemilik berhasil dihapus.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus pemilik: ' . $e->getMessage());
+        }
+    }
 }
