@@ -27,6 +27,9 @@ Auth::routes();
 // admin role
 Route::middleware(['IsAdministrator'])->group(function () {
     Route::get('/admin-dashboard', [AdminControl::class, 'index'])->name('admin.index');
+    Route::get('/admin/profile', [AdminControl::class, 'profileAdmin'])->name('admin.profile');
+    Route::get('/admin/profile/edit', [AdminControl::class, 'editProfileAdmin'])->name('admin.profile.edit');
+    Route::put('/admin/profile', [AdminControl::class, 'updateProfileAdmin'])->name('admin.profile.update');
     // crud
     Route::get('/manage-user', [AdminControl::class, 'manageUsers'])->name('admin.manage_user');
     Route::post('/add-user', [UserController::class, 'stored'])->name('admin.add_user');

@@ -158,6 +158,26 @@
             </li>
         </ul>
     @elseif (session('user_role') == 5)
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto resepsionis-nav">
+            <li class="nav-item">
+                <x-nav-link href="/pemilik-dashboard" :active="request()->is('pemilik-dashboard*')"
+                    icn="bi bi-house-door me-2">
+                    Dashboard
+                </x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link href="/pemilik-pet" :active="request()->is('pemilik-pet*')" icn="bi bi-clipboard2-plus me-2">
+                    Data Pet
+                </x-nav-link>
+            </li>
+            <li class="nav-item">
+                <x-nav-link href="/pemilik-reservasi" :active="request()->is('pemilik-reservasi*')"
+                    icn="bi bi-person-plus me-2">
+                    Data Reservasi
+                </x-nav-link>
+            </li>
+        </ul>
     @endif
     <hr>
     <div class="dropdown">
@@ -166,10 +186,16 @@
             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="" width="32" height="32"
                 class="rounded-circle me-2">
-            <strong>{{ session('user_name') ?? (Auth::user()->nama ?? (Auth::user()->name ?? 'User')) }}</strong>
+            <strong>{{ Auth::user()->nama ?? (Auth::user()->name ?? 'User') }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow"
             aria-labelledby="dropdownUser1" style="">
+            @if (session('user_role') == 1)
+                <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profil</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+            @endif
             <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
         </ul>
     </div>

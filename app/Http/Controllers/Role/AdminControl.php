@@ -14,6 +14,9 @@ use App\Models\Categories;
 use App\Models\Dokter;
 use App\Models\ras_hewan;
 use App\Models\Perawat;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminControl extends Controller
 {
@@ -96,5 +99,41 @@ class AdminControl extends Controller
         // for now return all users — later can filter by role
         $perawats = Perawat::all();
         return view('admin.perawat.manage_perawat', compact('perawats'));
+    }
+
+    public function profileAdmin()
+    {
+        $user = Auth::user();
+        return view('admin.profile', compact('user'));
+    }
+
+    public function editProfileAdmin()
+    {
+        $user = Auth::user();
+        return view('admin.edit-profile', compact('user'));
+    }
+
+    public function updateProfileAdmin(Request $request)
+    {
+        $user = Auth::user();
+
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:user,email,' . $user->iduser . ',iduser',
+            'password' => 'nullable|string|min:6|confirmed',
+        ]);
+
+        User::where('iduser', $user->iduser)->update([
+            'nama' => $validatedData['nama'],
+            'email' => $validatedData['email'],
+        ]);
+
+        if (!empty($validatedData['password'])) {
+            User::where('iduser', $user->iduser)->update([
+                'password' => Hash::make($validatedData['password']),
+            ]);
+        }
+
+        return redirect()->route('admin.profile')->with('success', 'Profil berhasil diperbarui.');
     }
 }
