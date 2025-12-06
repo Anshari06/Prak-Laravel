@@ -127,17 +127,20 @@
                                 <td>{{ $pemilik->alamat ?? '-' }}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
-                                        <a href="#" class="btn btn-sm btn-info p-1 px-2"
-                                            title="Lihat"><i class="bi bi-eye fs-6"></i></a>
-                                        <a href="#" class="btn btn-sm btn-warning p-1 px-2"
-                                            title="Edit"><i class="bi bi-pencil fs-6"></i></a>
-                                        <form method="POST" class="d-inline"
+                                        <a href="{{ route('admin.pemilik.show_pemilik', $pemilik->idpemilik) }}"
+                                            class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
+                                                class="bi bi-eye fs-6"></i></a>
+                                        <a href="{{ route('admin.pemilik.edit_pemilik', $pemilik->idpemilik) }}"
+                                            class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
+                                                class="bi bi-pencil fs-6"></i></a>
+                                        <form
+                                            action="{{ route('admin.pemilik.delete_pemilik', $pemilik->idpemilik) }}"
+                                            method="POST" class="d-inline"
                                             onsubmit="return confirm('Yakin ingin menghapus pemilik ini?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="btn btn-sm btn-danger p-1 px-2"
-                                                title="Hapus"><i
+                                                class="btn btn-sm btn-danger p-1 px-2" title="Hapus"><i
                                                     class="bi bi-trash fs-6"></i></button>
                                         </form>
                                     </div>

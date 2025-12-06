@@ -107,20 +107,21 @@
             </div>
         </div>
 
-        @if(session('error'))
+        @if (session('error'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                    aria-label="Close"></button>
             </div>
         @endif
 
         @if ($errors->any())
             <div class="alert alert-danger">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 
@@ -143,18 +144,22 @@
                     <tbody>
                         @foreach ($dokters as $dokter)
                             <tr>
-                                <td>{{ $loop -> iteration }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $dokter->id_dokter ?? '-' }}</td>
                                 <td>{{ $dokter->user->nama ?? '-' }}</td>
                                 <td>{{ $dokter->no_hp ?? '-' }}</td>
                                 <td>{{ $dokter->alamat ?? '-' }}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
-                                        <a href="#" class="btn btn-sm btn-info p-1 px-2"
-                                            title="Lihat"><i class="bi bi-eye fs-6"></i></a>
-                                        <a href="#" class="btn btn-sm btn-warning p-1 px-2"
-                                            title="Edit"><i class="bi bi-pencil fs-6"></i></a>
-                                        <form method="POST" class="d-inline"
+                                        <a href="{{ route('admin.dokter.show_dokter', $dokter->id_dokter) }}"
+                                            class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
+                                                class="bi bi-eye fs-6"></i></a>
+                                        <a href="{{ route('admin.dokter.edit_dokter', $dokter->id_dokter) }}"
+                                            class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
+                                                class="bi bi-pencil fs-6"></i></a>
+                                        <form
+                                            action="{{ route('admin.dokter.delete_dokter', $dokter->id_dokter) }}"
+                                            method="POST" class="d-inline"
                                             onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                             @csrf
                                             @method('DELETE')

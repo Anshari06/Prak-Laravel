@@ -135,11 +135,15 @@
                                 <td>{{ $perawat->pendidikan ?? '-' }}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
-                                        <a href="#" class="btn btn-sm btn-info p-1 px-2"
-                                            title="Lihat"><i class="bi bi-eye fs-6"></i></a>
-                                        <a href="#" class="btn btn-sm btn-warning p-1 px-2"
-                                            title="Edit"><i class="bi bi-pencil fs-6"></i></a>
-                                        <form method="POST" class="d-inline"
+                                        <a href="{{ route('admin.perawat.show_perawat', $perawat->id_perawat) }}"
+                                            class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
+                                                class="bi bi-eye fs-6"></i></a>
+                                        <a href="{{ route('admin.perawat.edit_perawat', $perawat->id_perawat) }}"
+                                            class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
+                                                class="bi bi-pencil fs-6"></i></a>
+                                        <form
+                                            action="{{ route('admin.perawat.destroy_perawat', $perawat->id_perawat) }}"
+                                            method="POST" class="d-inline"
                                             onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                             @csrf
                                             @method('DELETE')

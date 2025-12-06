@@ -4,7 +4,7 @@
 @section('page-heading', 'Dashboard')
 
 @section('content')
-    <h2 class="mt-0 mb-2">Welcome {{ session('user_name') }}!</h2>
+    <h2 class="mt-0 mb-2">Welcome {{ Auth::user()->nama ?? (Auth::user()->name ?? 'User') }}!</h2>
     <p class="mb-3">Your data is right here</p>
 
     {{-- Statistik cards (akan menampilkan jumlah dari DB) --}}

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\JenisHewanController;
 use App\Http\Controllers\PemilikController;
+use App\Http\Controllers\PetController;
 use App\Http\Controllers\Role\ResepsionisController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -40,21 +41,36 @@ Route::middleware(['IsAdministrator'])->group(function () {
 
     Route::get('/manage-pemilik', [AdminControl::class, 'managePemilik'])->name('admin.pemilik.manage_pemilik');
     Route::post('/add-Pemilik', [PemilikController::class, 'store'])->name('admin.add_pemilik');
+    Route::get('/manage-pemilik/{id}', [PemilikController::class, 'show'])->name('admin.pemilik.show_pemilik');
+    Route::get('/manage-pemilik/{id}/edit', [PemilikController::class, 'edit'])->name('admin.pemilik.edit_pemilik');
+    Route::put('/manage-pemilik/{id}', [PemilikController::class, 'update'])->name('admin.pemilik.update_pemilik');
+    Route::delete('/delete-pemilik/{id}', [PemilikController::class, 'destroy'])->name('admin.pemilik.delete_pemilik');
 
     Route::get('/manage-jenis', [AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');
     Route::post('/add-jenis', [JenisHewanController::class, 'store'])->name('admin.add_jenis_hewan');
     Route::delete('delete-jenis/{id}', [JenisHewanController::class, 'destroy'])->name('admin.delete_jenis_hewan');
 
     Route::get('/manage-pet', [AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');
+    Route::get('/manage-pet/{id}', [PetController::class, 'show'])->name('admin.pet.show_pet');
+    Route::get('/manage-pet/{id}/edit', [PetController::class, 'edit'])->name('admin.pet.edit_pet');
+    Route::put('/manage-pet/{id}', [PetController::class, 'update'])->name('admin.pet.update_pet');
+    Route::delete('/manage-pet/{id}', [PetController::class, 'destroy'])->name('admin.pet.destroy_pet');
 
     Route::get('/manage-role', [AdminControl::class, 'manageRoles'])->name('admin.role.manage_role');
 
     Route::get('/manage-dokter', [AdminControl::class, 'manageDokter'])->name('admin.dokter.manage_dokter');
     Route::post('add-dokter', [DokterController::class, 'store'])->name('admin.dokter.add_dokter');
+    Route::get('/manage-dokter/{id}', [DokterController::class, 'show'])->name('admin.dokter.show_dokter');
+    Route::get('/manage-dokter/{id}/edit', [DokterController::class, 'edit'])->name('admin.dokter.edit_dokter');
+    Route::put('/manage-dokter/{id}', [DokterController::class, 'update'])->name('admin.dokter.update_dokter');
     Route::delete('delete-dokter/{id}', [DokterController::class, 'destroy'])->name('admin.dokter.delete_dokter');
 
     Route::get('/manage-perawat', [AdminControl::class, 'managePerawat'])->name('admin.perawat.manage_perawat');
     Route::post('add-perawat', [PerawatController::class, 'store'])->name('admin.perawat.add_perawat');
+    Route::get('/manage-perawat/{id}', [PerawatController::class, 'show'])->name('admin.perawat.show_perawat');
+    Route::get('/manage-perawat/{id}/edit', [PerawatController::class, 'edit'])->name('admin.perawat.edit_perawat');
+    Route::put('/manage-perawat/{id}', [PerawatController::class, 'update'])->name('admin.perawat.update_perawat');
+    Route::delete('/manage-perawat/{id}', [PerawatController::class, 'destroy'])->name('admin.perawat.destroy_perawat');
 
     Route::get('/manage-kategori', [AdminControl::class, 'manageKategori'])->name('admin.tindakan.manage_kategori');
     Route::get('/manage-kategori-klinis', [AdminControl::class, 'manageKat_klinis'])->name('admin.Klinis.manage_klinis');

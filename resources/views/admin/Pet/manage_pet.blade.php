@@ -37,11 +37,14 @@
                                 <td>{{ $pet->pemilik->user->nama ?? ($pet->pemilik->nama ?? '-') }}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
-                                        <a href="#" class="btn btn-sm btn-info p-1 px-2"
-                                            title="Lihat"><i class="bi bi-eye fs-6"></i></a>
-                                        <a href="#" class="btn btn-sm btn-warning p-1 px-2"
-                                            title="Edit"><i class="bi bi-pencil fs-6"></i></a>
-                                        <form method="POST" class="d-inline"
+                                        <a href="{{ route('admin.pet.show_pet', $pet->idpet) }}"
+                                            class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
+                                                class="bi bi-eye fs-6"></i></a>
+                                        <a href="{{ route('admin.pet.edit_pet', $pet->idpet) }}"
+                                            class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
+                                                class="bi bi-pencil fs-6"></i></a>
+                                        <form action="{{ route('admin.pet.destroy_pet', $pet->idpet) }}"
+                                            method="POST" class="d-inline"
                                             onsubmit="return confirm('Yakin ingin menghapus?')">
                                             @csrf
                                             @method('DELETE')

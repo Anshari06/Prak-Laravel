@@ -64,18 +64,98 @@ class DokterController extends Controller
     }
 
 
+    public function show($id)
+    {
+        $dokter = DB::table('dokter')
+            ->join('user', 'dokter.id_user', '=', 'user.iduser')
+            ->where('dokter.id_dokter', $id)
+            ->select('dokter.*', 'user.nama', 'user.email')
+            ->first();
+
+        if (!$dokter) {
+            return redirect()->route('admin.dokter.manage_dokter')->with('error', 'Dokter tidak ditemukan.');
+        }
+
+        return view('admin.dokter.show', compact('dokter'));
+    }
+
+    public function edit($id)
+    {
+        $dokter = DB::table('dokter')
+            ->join('user', 'dokter.id_user', '=', 'user.iduser')
+            ->where('dokter.id_dokter', $id)
+            ->select('dokter.*', 'user.nama', 'user.email')
+            ->first();
+
+        if (!$dokter) {
+            return redirect()->route('admin.dokter.manage_dokter')->with('error', 'Dokter tidak ditemukan.');
+        }
+
+        return view('admin.dokter.edit', compact('dokter'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $dokter = Dokter::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'alamat' => 'required|string|max:100',
+            'no_wa' => 'required|string|max:50',
+            'bidang_dokter' => 'nullable|string|max:100',
+            'jenis_kelamin' => 'required|in:L,P',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            // Update user
+            DB::table('user')->where('iduser', $dokter->id_user)->update([
+                'nama' => $validatedData['nama'],
+                'email' => $validatedData['email'],
+            ]);
+
+            // Update dokter
+            $dokter->update([
+                'alamat' => $validatedData['alamat'],
+                'no_hp' => $validatedData['no_wa'],
+                'bidang_dokter' => $validatedData['bidang_dokter'],
+                'jenis_kelamin' => $validatedData['jenis_kelamin'],
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('admin.dokter.show_dokter', $id)->with('success', 'Dokter berhasil diupdate.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal mengupdate dokter: ' . $e->getMessage());
+        }
+    }
+
     public function destroy($id)
     {
-        // Find the user by ID
-        $user = Dokter::find($id);
+        try {
+            $dokter = Dokter::findOrFail($id);
+            $userId = $dokter->id_user;
 
-        if ($user) {
-            // Delete the user
-            $user->delete();
+            DB::beginTransaction();
+
+            // Delete dokter record
+            $dokter->delete();
+
+            // Delete role_user records
+            RoleUser::where('iduser', $userId)->delete();
+
+            // Delete user
+            User::where('iduser', $userId)->delete();
+
+            DB::commit();
 
             return redirect()->route('admin.dokter.manage_dokter')->with('success', 'Dokter berhasil dihapus.');
-        } else {
-            return redirect()->route('admin.dokter.manage_dokter')->with('error', 'Dokter tidak ditemukan.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal menghapus dokter: ' . $e->getMessage());
         }
     }
 }

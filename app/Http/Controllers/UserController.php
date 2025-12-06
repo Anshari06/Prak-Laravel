@@ -73,6 +73,21 @@ class UserController extends Controller
         return redirect()->route('admin.user.show', $id)->with('success', 'User berhasil diupdate.');
     }
 
+    /**
+     * Delete the specified user from storage.
+     */
+    public function destroy($id)
+    {
+        // Delete related records first
+        DB::table('role_user')->where('iduser', $id)->delete();
+        DB::table('pemilik')->where('iduser', $id)->delete();
+
+        // Delete the user
+        DB::table('user')->where('iduser', $id)->delete();
+
+        return redirect()->route('admin.manage_user')->with('success', 'User berhasil dihapus.');
+    }
+
     public function stored(Request $request)
     {
 
