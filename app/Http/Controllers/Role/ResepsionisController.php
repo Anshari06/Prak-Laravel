@@ -106,6 +106,74 @@ class ResepsionisController extends Controller
         return view('resepsionis.temu_dokter.success', compact('temu', 'nomorUrut'));
     }
 
+    public function editTemuDokter($id)
+    {
+        $temu = Temu_dokter::with(['pet', 'role_user.user'])->find($id);
+        if (!$temu) {
+            return redirect()->route('resepsionis.temu.index')->with('error', 'Data temu dokter tidak ditemukan.');
+        }
+
+        $pets = Pet::with('pemilik.user')->get();
+        $dokters = RoleUser::with('user')
+            ->where('idrole', 2)
+            ->get();
+
+        return view('resepsionis.temu_dokter.edit', compact('temu', 'pets', 'dokters'));
+    }
+
+    public function updateTemuDokter(Request $request, $id)
+    {
+        $temu = Temu_dokter::find($id);
+        if (!$temu) {
+            return redirect()->route('resepsionis.temu.index')->with('error', 'Data temu dokter tidak ditemukan.');
+        }
+
+        $validatedData = $request->validate([
+            'idpet' => 'required|exists:pet,idpet',
+            'idrole_user' => 'required|exists:role_user,idrole_user',
+            'waktu_daftar' => 'required|date_format:Y-m-d\TH:i',
+            'status' => 'required|in:P,S,C',
+        ]);
+
+        // Convert datetime-local format (Y-m-d\TH:i) to Y-m-d H:i
+        $waktuDaftar = str_replace('T', ' ', $validatedData['waktu_daftar']);
+
+        // Get the date part only
+        $date = substr($waktuDaftar, 0, 10);
+        $oldDate = substr($temu->waktu_daftar, 0, 10);
+
+        // If date changed, recalculate no_urut for the new date
+        if ($date !== $oldDate) {
+            // Count how many reservations exist for the new date
+            $countForDay = Temu_dokter::whereRaw("DATE(waktu_daftar) = ?", [$date])->count();
+            $no_urut = $countForDay + 1;
+        } else {
+            // Keep the same no_urut
+            $no_urut = $temu->no_urut;
+        }
+
+        $temu->update([
+            'idpet' => $validatedData['idpet'],
+            'idrole_user' => $validatedData['idrole_user'],
+            'waktu_daftar' => $waktuDaftar,
+            'no_urut' => $no_urut,
+            'status' => $validatedData['status'],
+        ]);
+
+        return redirect()->route('resepsionis.temu.index')->with('success', 'Temu dokter berhasil diperbarui.');
+    }
+
+    public function deleteTemuDokter($id)
+    {
+        $temu = Temu_dokter::find($id);
+        if (!$temu) {
+            return redirect()->route('resepsionis.temu.index')->with('error', 'Data temu dokter tidak ditemukan.');
+        }
+
+        $temu->delete();
+        return redirect()->route('resepsionis.temu.index')->with('success', 'Temu dokter berhasil dihapus.');
+    }
+
     public function storePemilik(Request $request)
     {
         try {

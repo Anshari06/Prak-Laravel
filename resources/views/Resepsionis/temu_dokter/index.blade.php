@@ -20,6 +20,7 @@
                         <th>Pet</th>
                         <th>Dokter</th>
                         <th>Status</th>
+                        <th style="width:100px">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +33,29 @@
                             <td>{{ $temu->computed_no_urut ?? ($temu->no_urut ?? '-') }}</td>
                             <td>{{ $temu->pet->nama ?? '-' }}</td>
                             <td>{{ $temu->role_user->user->nama ?? '-' }}</td>
-                            <td>{{ $temu->status ?? '-' }}</td>
+                            <td>
+                                @if ($temu->status === 'P')
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                @elseif ($temu->status === 'S')
+                                    <span class="badge bg-success">Selesai</span>
+                                @elseif ($temu->status === 'C')
+                                    <span class="badge bg-danger">Batal</span>
+                                @else
+                                    <span class="badge bg-secondary">-</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('resepsionis.temu.edit', $temu->idreservasi_dokter) }}" class="btn btn-sm btn-warning p-1 px-2" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form method="POST" class="d-inline" action="{{ route('resepsionis.temu.delete', $temu->idreservasi_dokter) }}" onsubmit="return confirm('Yakin ingin menghapus temu dokter ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger p-1 px-2" title="Hapus">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

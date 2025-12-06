@@ -73,6 +73,9 @@ Route::middleware(['IsResepsionis'])->group(function () {
     Route::get('/temu-dokter/create', [ResepsionisController::class, 'createTemuDokter'])->name('resepsionis.temu.create');
     Route::post('/temu-dokter', [ResepsionisController::class, 'storeTemuDokter'])->name('resepsionis.temu.store');
     Route::get('/temu-dokter/success/{id}', [ResepsionisController::class, 'successTemuDokter'])->name('resepsionis.temu.success');
+    Route::get('/temu-dokter/{id}/edit', [ResepsionisController::class, 'editTemuDokter'])->name('resepsionis.temu.edit');
+    Route::put('/temu-dokter/{id}', [ResepsionisController::class, 'updateTemuDokter'])->name('resepsionis.temu.update');
+    Route::delete('/temu-dokter/{id}', [ResepsionisController::class, 'deleteTemuDokter'])->name('resepsionis.temu.delete');
 });
 
 // Dokter Role
