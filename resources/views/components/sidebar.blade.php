@@ -119,6 +119,7 @@
         </ul>
     @elseif (session('user_role') == 3)
         <ul class="nav nav-pills flex-column mb-auto perawat-nav">
+            <hr>
             <li class="nav-item">
                 <x-nav-link href="/perawat-dashboard" :active="request()->is('perawat-dashboard')"
                     icn="bi bi-house-door me-2">
@@ -133,6 +134,7 @@
         </ul>
     @elseif (session('user_role') == 4)
         <ul class="nav nav-pills flex-column mb-auto resepsionis-nav">
+            <hr>
             <li class="nav-item">
                 <x-nav-link href="/resepsionis-dashboard" :active="request()->is('resepsionis-dashboard')"
                     icn="bi bi-house-door me-2">
