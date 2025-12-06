@@ -19,8 +19,9 @@ class ResepsionisController extends Controller
     {
         $TemuCount = Temu_dokter::count();
         $PemilikCount = Pemilik::count();
+        $PetCount = Pet::count();
         $temuStatus = Temu_dokter::where('status', 'P')->count();
-        return view('resepsionis.index', compact('TemuCount', 'PemilikCount', 'temuStatus'));
+        return view('resepsionis.index', compact('TemuCount', 'PemilikCount', 'temuStatus', 'PetCount'));
     }
 
     public function regisPet()
