@@ -40,8 +40,11 @@ class ResepsionisController extends Controller
 
     public function temuDokter()
     {
-        // load reservations ordered by waktu_daftar
-        $temus = Temu_dokter::with(['pet', 'role_user.user'])->orderBy('idreservasi_dokter')->get();
+        // load reservations ordered by waktu_daftar descending (newest first), then by no_urut descending (highest first)
+        $temus = Temu_dokter::with(['pet', 'role_user.user'])
+            ->orderByRaw("DATE(waktu_daftar) DESC")
+            ->orderBy('no_urut', 'DESC')
+            ->get();
         return view('resepsionis.temu_dokter.index', compact('temus'));
     }
 
