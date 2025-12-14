@@ -110,6 +110,10 @@ Route::middleware(['IsDokter'])->group(function () {
 // Pemilik Role
 Route::middleware(['IsPemilik'])->group(function () {
     Route::get('/pemilik-dashboard', [Pemilik::class, 'index'])->name('pemilik.index');
+    Route::get('/pemilik-pet', [Pemilik::class, 'pet'])->name('pemilik.pet');
+    Route::get('/pemilik-reservasi', [Pemilik::class, 'reservasi'])->name('pemilik.reservasi');
+    Route::get('/pemilik-rekam', [Pemilik::class, 'rekam'])->name('pemilik.rekam');
+    Route::get('/pemilik-rekam/{id}', [Pemilik::class, 'rekamShow'])->name('pemilik.rekam.show');
 });
 
 // perawat role

@@ -177,6 +177,12 @@
                     Data Reservasi
                 </x-nav-link>
             </li>
+            <li class="nav-item">
+                <x-nav-link href="/pemilik-rekam" :active="request()->is('pemilik-rekam*')"
+                    icn="bi bi-journal-medical me-2">
+                    Rekam Medis
+                </x-nav-link>
+            </li>
         </ul>
     @endif
     <hr>

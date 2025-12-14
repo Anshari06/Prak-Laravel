@@ -7,25 +7,36 @@
         <h2 class="mt-0 mb-2">Welcome {{ session('user_name') }} !</h2>
         <p class="mb-3">Your data is right here</p>
     </div>
-    <div class="row">
-        <div class="col-6 col-md-3">
-            <div class="card shadow-sm">
+    <div class="row g-3 g-md-4">
+        <div class="col-6 col-md-4 col-xl-3">
+            <div class="card shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
                     <i class='bx bx-paw-print fs-1 me-3 text-primary'></i>
                     <div>
                         <div class="text-muted small">Pet Anda</div>
-                        <div class="fs-3 fw-bold">{{ $petCount ?? '—' }}</div>
+                        <div class="fs-3 fw-bold mb-0">{{ $petCount ?? '—' }}</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-6 col-md-3">
-            <div class="card shadow-sm">
+        <div class="col-6 col-md-4 col-xl-3">
+            <div class="card shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <i class='bi bi-card-checklist fs-1 me-3 text-warning'></i>
+                    <i class='bi bi-calendar2-check fs-1 me-3 text-success'></i>
                     <div>
-                        <div class="text-muted small">Jumlah Reservasi </div>
-                        <div class="fs-3 fw-bold">{{ $serveCount ?? '—' }}</div>
+                        <div class="text-muted small">Jumlah Reservasi</div>
+                        <div class="fs-3 fw-bold mb-0">{{ $serveCount ?? '—' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class='bi bi-journal-medical fs-1 me-3 text-warning'></i>
+                    <div>
+                        <div class="text-muted small">Jumlah Rekam Medis</div>
+                        <div class="fs-3 fw-bold mb-0">{{ $rekamcount ?? '—' }}</div>
                     </div>
                 </div>
             </div>
@@ -69,9 +80,11 @@
                                         @foreach ($pets as $pet)
                                             <tr>
                                                 <td>{{ $pet->nama ?? '—' }}</td>
-                                                <td>{{ $pet->jenis_hewan->nama_jenis_hewan ?? '—' }}</td>
+                                                <td>{{ $pet->jenis_hewan->nama_jenis_hewan ?? '—' }}
+                                                </td>
                                                 <td>{{ $pet->ras_hewan->nama_ras ?? '—' }}</td>
-                                                <td>{{ !empty($pet->tanggal_lahir) ? \Carbon\Carbon::parse($pet->tanggal_lahir)->age . ' tahun' : '—' }}</td>
+                                                <td>{{ !empty($pet->tanggal_lahir) ? \Carbon\Carbon::parse($pet->tanggal_lahir)->age . ' tahun' : '—' }}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
