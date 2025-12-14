@@ -99,6 +99,10 @@ Route::middleware(['IsResepsionis'])->group(function () {
     Route::get('/temu-dokter/{id}/edit', [ResepsionisController::class, 'editTemuDokter'])->name('resepsionis.temu.edit');
     Route::put('/temu-dokter/{id}', [ResepsionisController::class, 'updateTemuDokter'])->name('resepsionis.temu.update');
     Route::delete('/temu-dokter/{id}', [ResepsionisController::class, 'deleteTemuDokter'])->name('resepsionis.temu.delete');
+    // Profil Resepsionis
+    Route::get('/resepsionis/profile', [ResepsionisController::class, 'profileResepsionis'])->name('resepsionis.profile');
+    Route::get('/resepsionis/profile/edit', [ResepsionisController::class, 'editProfileResepsionis'])->name('resepsionis.profile.edit');
+    Route::put('/resepsionis/profile', [ResepsionisController::class, 'updateProfileResepsionis'])->name('resepsionis.profile.update');
 });
 
 // Dokter Role
@@ -106,6 +110,10 @@ Route::middleware(['IsDokter'])->group(function () {
     Route::get('/dokter-dashboard', [DokterControll::class, 'index'])->name('dokter.index');
     Route::get('/dokter/rekam', [DokterControll::class, 'rekam'])->name('dokter.rekam.rekam');
     Route::get('/dokter/rekam/{id}', [DokterControll::class, 'show'])->name('dokter.rekam.show');
+    // Profil Dokter
+    Route::get('/dokter/profile', [DokterControll::class, 'profileDokter'])->name('dokter.profile');
+    Route::get('/dokter/profile/edit', [DokterControll::class, 'editProfileDokter'])->name('dokter.profile.edit');
+    Route::put('/dokter/profile', [DokterControll::class, 'updateProfileDokter'])->name('dokter.profile.update');
 });
 
 // Pemilik Role
@@ -115,6 +123,10 @@ Route::middleware(['IsPemilik'])->group(function () {
     Route::get('/pemilik-reservasi', [Pemilik::class, 'reservasi'])->name('pemilik.reservasi');
     Route::get('/pemilik-rekam', [Pemilik::class, 'rekam'])->name('pemilik.rekam');
     Route::get('/pemilik-rekam/{id}', [Pemilik::class, 'rekamShow'])->name('pemilik.rekam.show');
+    // Profil Pemilik
+    Route::get('/pemilik/profile', [Pemilik::class, 'profilePemilik'])->name('pemilik.profile');
+    Route::get('/pemilik/profile/edit', [Pemilik::class, 'editProfilePemilik'])->name('pemilik.profile.edit');
+    Route::put('/pemilik/profile', [Pemilik::class, 'updateProfilePemilik'])->name('pemilik.profile.update');
 });
 
 // perawat role
@@ -128,4 +140,8 @@ Route::middleware(['IsPerawat'])->group(function () {
     Route::get('/perawat-rekam/{id}', [Perawat::class, 'show'])->name('perawat.rekam.show');
     Route::get('/perawat-rekam/{id}/edit', [Perawat::class, 'edit'])->name('perawat.rekam.edit');
     Route::put('/perawat-rekam/{id}', [Perawat::class, 'update'])->name('perawat.rekam.update');
+    // Profil Perawat
+    Route::get('/perawat/profile', [Perawat::class, 'profilePerawat'])->name('perawat.profile');
+    Route::get('/perawat/profile/edit', [Perawat::class, 'editProfilePerawat'])->name('perawat.profile.edit');
+    Route::put('/perawat/profile', [Perawat::class, 'updateProfilePerawat'])->name('perawat.profile.update');
 });

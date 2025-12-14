@@ -10,6 +10,8 @@ use App\Models\Pemilik as PemilikModel;
 use App\Models\RekamMedis;
 use App\Models\detailRekam;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 
 class Pemilik extends Controller
@@ -116,5 +118,43 @@ class Pemilik extends Controller
             ->get();
 
         return view('Pemilik.rekam_show', compact('rekam', 'detail', 'pemilik'));
+    }
+
+    /**
+     * Profile pages for Pemilik
+     */
+    public function profilePemilik()
+    {
+        $user = Auth::user();
+        return view('Pemilik.profile', compact('user'));
+    }
+
+    public function editProfilePemilik()
+    {
+        $user = Auth::user();
+        return view('Pemilik.edit-profile', compact('user'));
+    }
+
+    public function updateProfilePemilik(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:user,email,' . $user->iduser . ',iduser',
+            'password' => 'nullable|confirmed|min:6',
+        ]);
+
+        $updateData = [
+            'nama' => $validated['nama'],
+            'email' => $validated['email'],
+        ];
+        if (!empty($validated['password'])) {
+            $updateData['password'] = Hash::make($validated['password']);
+        }
+
+        User::where('iduser', $user->iduser)->update($updateData);
+
+        return redirect()->route('pemilik.profile')->with('success', 'Profil berhasil diperbarui.');
     }
 }

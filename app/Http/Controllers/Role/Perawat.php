@@ -10,6 +10,9 @@ use App\Models\Pet;
 use App\Models\RoleUser;
 use App\Models\kat_tindakan;
 use App\Models\Temu_dokter;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class Perawat extends Controller
 {
@@ -143,5 +146,43 @@ class Perawat extends Controller
         }
 
         return redirect()->route('perawat.rekam.show', $rekam->idrekam_medis)->with('success', 'Rekam medis diperbarui.');
+    }
+
+    /**
+     * Profile pages for Perawat
+     */
+    public function profilePerawat()
+    {
+        $user = Auth::user();
+        return view('Perawat.profile', compact('user'));
+    }
+
+    public function editProfilePerawat()
+    {
+        $user = Auth::user();
+        return view('Perawat.edit-profile', compact('user'));
+    }
+
+    public function updateProfilePerawat(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:user,email,' . $user->iduser . ',iduser',
+            'password' => 'nullable|confirmed|min:6',
+        ]);
+
+        $updateData = [
+            'nama' => $validated['nama'],
+            'email' => $validated['email'],
+        ];
+        if (!empty($validated['password'])) {
+            $updateData['password'] = Hash::make($validated['password']);
+        }
+
+        User::where('iduser', $user->iduser)->update($updateData);
+
+        return redirect()->route('perawat.profile')->with('success', 'Profil berhasil diperbarui.');
     }
 }

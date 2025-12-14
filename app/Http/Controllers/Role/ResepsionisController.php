@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Pet;
 use App\Models\Temu_dokter;
 use App\Models\Pemilik;
-use App\Models\User;
 use App\Models\RoleUser;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class ResepsionisController extends Controller
 {
@@ -347,5 +349,43 @@ class ResepsionisController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus pemilik: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Profile pages for Resepsionis
+     */
+    public function profileResepsionis()
+    {
+        $user = Auth::user();
+        return view('Resepsionis.profile', compact('user'));
+    }
+
+    public function editProfileResepsionis()
+    {
+        $user = Auth::user();
+        return view('Resepsionis.edit-profile', compact('user'));
+    }
+
+    public function updateProfileResepsionis(Request $request)
+    {
+        $user = Auth::user();
+
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:user,email,' . $user->iduser . ',iduser',
+            'password' => 'nullable|confirmed|min:6',
+        ]);
+
+        $updateData = [
+            'nama' => $validated['nama'],
+            'email' => $validated['email'],
+        ];
+        if (!empty($validated['password'])) {
+            $updateData['password'] = Hash::make($validated['password']);
+        }
+
+        User::where('iduser', $user->iduser)->update($updateData);
+
+        return redirect()->route('resepsionis.profile')->with('success', 'Profil berhasil diperbarui.');
     }
 }

@@ -202,6 +202,32 @@
                     <hr class="dropdown-divider">
                 </li>
             @endif
+            @if (session('user_role') == 2)
+                <li><a class="dropdown-item" href="{{ route('dokter.profile') }}">Profil</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+            @endif
+            @if (session('user_role') == 3)
+                <li><a class="dropdown-item" href="{{ route('perawat.profile') }}">Profil</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+            @endif
+            @if (session('user_role') == 4)
+                <li><a class="dropdown-item" href="{{ route('resepsionis.profile') }}">Profil</a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+            @endif
+            @if (session('user_role') == 5)
+                <li><a class="dropdown-item" href="{{ route('pemilik.profile') }}">Profil
+                    </a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+            @endif
             <li><a class="dropdown-item" href="{{ route('logout') }}">Sign out</a></li>
         </ul>
     </div>
