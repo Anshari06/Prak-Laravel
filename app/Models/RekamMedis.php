@@ -8,6 +8,7 @@ class RekamMedis extends Model
 {
     protected $table = 'rekam_medis';
     protected $primaryKey = 'idrekam_medis';
+    public $timestamps = false; // Nonaktifkan timestamps
 
     protected $fillable = [
         'created_at',
@@ -47,5 +48,4 @@ class RekamMedis extends Model
     {
         return $this->belongsTo(Temu_dokter::class, 'idreservasi_dokter', 'idreservasi_dokter');
     }
-    
 }

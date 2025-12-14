@@ -16,7 +16,7 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="idpet" class="form-label">Pilih Pet</label>
                         <select name="idpet" id="idpet" class="form-select" required>
                             @foreach ($pets as $pet)
@@ -26,7 +26,7 @@
                                 </option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3">
                         <label for="temuan_klinis" class="form-label">Temuan Klinis</label>
@@ -39,10 +39,15 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="tindakan" class="form-label">Tindakan (ringkasan)</label>
-                        <textarea name="tindakan" id="tindakan" class="form-control" rows="3">{{ old('tindakan', $rekam->tindakan) }}</textarea>
+                        <label for="anamnesa" class="form-label">Anamnesa</label>
+                        <textarea name="anamnesa" id="anamnesa" class="form-control" rows="3">{{ old('anamnesa', $rekam->anamnesa) }}</textarea>
                     </div>
-
+                    
+                    <div class="col-md-6">
+                        <label class="form-label">Detail</label>
+                        <textarea name="existing_details[{{ $d->iddetail_rekam_medis }}][detail]" class="form-control" rows="2">{{ old('existing_details.'.$d->iddetail_rekam_medis.'.detail', $d->detail) }}</textarea>
+                    </div>
+                    
                     <hr>
                     <h5>Detail Tindakan (Rinci)</h5>
 
@@ -61,10 +66,6 @@
                                                     <option value="{{ $t->idkode_tindakan_terapi }}" {{ $d->idkode_tindakan_terapi == $t->idkode_tindakan_terapi ? 'selected' : '' }}>{{ $t->deskripsi_tindakan_terapi }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Detail</label>
-                                            <textarea name="existing_details[{{ $d->iddetail_rekam_medis }}][detail]" class="form-control" rows="2">{{ old('existing_details.'.$d->iddetail_rekam_medis.'.detail', $d->detail) }}</textarea>
                                         </div>
                                         <div class="col-md-1 d-flex align-items-start">
                                             <div class="form-check mt-2">

@@ -37,22 +37,17 @@ class Perawat extends Controller
             ->first();
         $id = is_numeric($id) ? $id : null;
         $rekam = RekamMedis::with(['pet', 'detailRekams.katTindakan'])->findOrFail($id);
-        return view('Perawat.rekam.show', compact('rekam'));
+        $detail = detailRekam::where('idrekam_medis', $id)->get();
+        return view('Perawat.rekam.show', compact('rekam', 'detail'));
     }
     /**
      * Show form to create a new RekamMedis (Perawat).
      */
     public function create()
     {
-        $pets = Pet::all();
-        // load users that have a role name like 'dokter'
-        $doctors = RoleUser::with('user', 'role')
-            ->whereHas('role', function ($q) {
-                $q->where('nama_role', 'like', '%dokter%');
-            })->get();
-        
-        $temus = Temu_dokter::all();
-        return view('Perawat.rekam.create', compact('pets', 'doctors', 'temus'));
+        // Load reservasi dengan relasi pet dan dokter
+        $temus = Temu_dokter::with('pet', 'role_user.user')->get();
+        return view('Perawat.rekam.create', compact('temus'));
     }
 
     /**
@@ -61,23 +56,23 @@ class Perawat extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'idpet' => 'required|exists:pet,idpet',
-            'anamnesa' => 'nullable|string|max:2000',
+            'idreservasi_dokter' => 'required|exists:temu_dokter,idreservasi_dokter',
+            'anamnesa' => 'nullable|string|max:1000',
             'temuan_klinis' => 'nullable|string|max:1000',
             'diagnosa' => 'nullable|string|max:1000',
-            'tindakan' => 'nullable|string|max:2000',
-            'dokter_pemeriksa' => 'nullable|exists:role_user,idrole_user',
-            'idreservasi_dokter' => 'nullable|integer',
         ]);
 
+        // Ambil data dari reservasi
+        $reservasi = Temu_dokter::findOrFail($validated['idreservasi_dokter']);
+
         $rekam = new RekamMedis();
+        $rekam->idreservasi_dokter = $validated['idreservasi_dokter'];
+        $rekam->idpet = $reservasi->idpet; // Ambil dari reservasi
+        $rekam->dokter_pemeriksa = $reservasi->idrole_user; // Ambil dari reservasi
         $rekam->anamnesa = $validated['anamnesa'] ?? null;
-        $rekam->idpet = $validated['idpet'];
         $rekam->temuan_klinis = $validated['temuan_klinis'] ?? null;
         $rekam->diagnosa = $validated['diagnosa'] ?? null;
-        $rekam->dokter_pemeriksa = $validated['dokter_pemeriksa'] ?? null;
-        $rekam->idreservasi_dokter = $validated['idreservasi_dokter'] ?? null;
-        $rekam->tindakan = $validated['tindakan'] ?? null;
+        $rekam->created_at = now();
         $rekam->save();
 
         return redirect()->route('perawat.rekam')->with('success', 'Rekam medis berhasil dibuat.');
@@ -88,10 +83,10 @@ class Perawat extends Controller
      */
     public function edit($id)
     {
-        $rekam = RekamMedis::with(['pet', 'detailRekams.katTindakan'])->findOrFail($id);
-        $pets = Pet::all();
+        $rekam = RekamMedis::with(['detailRekams.katTindakan'])->findOrFail($id);
+        // $pets = Pet::all();
         $tindakans = kat_tindakan::all();
-        return view('Perawat.rekam.edit', compact('rekam', 'pets', 'tindakans'));
+        return view('Perawat.rekam.edit', compact('rekam', 'tindakans'));
     }
 
     /**
@@ -100,17 +95,15 @@ class Perawat extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'idpet' => 'required|exists:pet,idpet',
+            'anamnesa' => 'nullable|string|max:1000',
             'temuan_klinis' => 'nullable|string|max:1000',
             'diagnosa' => 'nullable|string|max:1000',
-            'tindakan' => 'nullable|string|max:2000',
         ]);
 
         $rekam = RekamMedis::findOrFail($id);
-        $rekam->idpet = $validated['idpet'];
+        $rekam->anamnesa = $validated['anamnesa'] ?? $rekam->anamnesa;
         $rekam->temuan_klinis = $validated['temuan_klinis'] ?? $rekam->temuan_klinis;
         $rekam->diagnosa = $validated['diagnosa'] ?? $rekam->diagnosa;
-        $rekam->tindakan = $validated['tindakan'] ?? $rekam->tindakan;
         $rekam->save();
 
         // Handle existing detail items (update or delete)
