@@ -48,6 +48,7 @@ Route::middleware(['IsAdministrator'])->group(function () {
 
     Route::get('/manage-jenis', [AdminControl::class, 'manageJenisHewan'])->name('admin.jenis_hewan.manage_jenis_hewan');
     Route::post('/add-jenis', [JenisHewanController::class, 'store'])->name('admin.add_jenis_hewan');
+    Route::put('/manage-jenis/{id}', [JenisHewanController::class, 'update'])->name('admin.update_jenis_hewan');
     Route::delete('delete-jenis/{id}', [JenisHewanController::class, 'destroy'])->name('admin.delete_jenis_hewan');
 
     Route::get('/manage-pet', [AdminControl::class, 'managePets'])->name('admin.pet.manage_pet');

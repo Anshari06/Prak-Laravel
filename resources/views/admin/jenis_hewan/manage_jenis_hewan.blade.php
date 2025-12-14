@@ -68,7 +68,7 @@
                                 <th style="width:60px">Num</th>
                                 <th scope="row">ID</th>
                                 <th scope="row">Nama Jenis Hewan</th>
-                                <th scope="row">Actions</th>
+                                <th scope="row" style="width:280px">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,23 +78,33 @@
                                     <td>{{ $jenis->idjenis_hewan ?? '-' }}</td>
                                     <td>{{ $jenis->nama_jenis_hewan ?? '-' }}</td>
                                     <td>
-                                        <div class="d-grid gap-2 d-md-block">
-                                            <a class="btn btn-sm btn-info p-1 px-2" title="Lihat"><i
-                                                    class="bi bi-eye fs-6"></i></a>
-                                            <a class="btn btn-sm btn-warning p-1 px-2" title="Edit"><i
-                                                    class="bi bi-pencil fs-6"></i></a>
-                                            <form method="POST"
-                                                action="{{ route('admin.delete_jenis_hewan', $jenis->idjenis_hewan) }}"
-                                                class="d-inline"
-                                                onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="btn btn-sm btn-danger p-1 px-2"
-                                                    title="Hapus"><i
-                                                        class="bi bi-trash fs-6"></i></button>
-                                            </form>
-                                        </div>
+                                        <form method="POST"
+                                            action="{{ route('admin.update_jenis_hewan', $jenis->idjenis_hewan) }}"
+                                            class="row g-2 align-items-center mb-2">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="col">
+                                                <input type="text" name="nama_jenis"
+                                                    class="form-control form-control-sm"
+                                                    value="{{ $jenis->nama_jenis_hewan ?? '' }}"
+                                                    placeholder="Nama Jenis Hewan">
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="submit" class="btn btn-sm btn-warning">
+                                                    <i class="bi bi-save"></i>
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <form method="POST"
+                                            action="{{ route('admin.delete_jenis_hewan', $jenis->idjenis_hewan) }}"
+                                            class="d-inline"
+                                            onsubmit="return confirm('Yakin ingin menghapus barang ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

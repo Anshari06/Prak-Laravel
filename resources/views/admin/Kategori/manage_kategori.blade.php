@@ -30,10 +30,6 @@
                                 <td>{{ $kat->nama_kategori ?? ($kat->name ?? '-') }}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
-                                        <a href="#" class="btn btn-sm btn-info p-1 px-2"
-                                            title="Lihat"><i class="bi bi-eye fs-6"></i></a>
-                                        <a href="#" class="btn btn-sm btn-warning p-1 px-2"
-                                            title="Edit"><i class="bi bi-pencil fs-6"></i></a>
                                         <form method="POST" class="d-inline"
                                             onsubmit="return confirm('Yakin ingin menghapus?')">
                                             @csrf
