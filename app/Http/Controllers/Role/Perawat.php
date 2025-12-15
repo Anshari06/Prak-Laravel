@@ -89,7 +89,8 @@ class Perawat extends Controller
         $rekam = RekamMedis::with(['detailRekams.katTindakan'])->findOrFail($id);
         // $pets = Pet::all();
         $tindakans = kat_tindakan::all();
-        return view('Perawat.rekam.edit', compact('rekam', 'tindakans'));
+        $detail = detailRekam::where('idrekam_medis', $id)->get();
+        return view('Perawat.rekam.edit', compact('rekam', 'tindakans', 'detail'));
     }
 
     /**
@@ -101,6 +102,12 @@ class Perawat extends Controller
             'anamnesa' => 'nullable|string|max:1000',
             'temuan_klinis' => 'nullable|string|max:1000',
             'diagnosa' => 'nullable|string|max:1000',
+            // Per-item detail validation for existing rows
+            'existing_details.*.detail' => 'nullable|string|max:1000',
+            'existing_details.*.idkode_tindakan_terapi' => 'nullable|integer',
+            // Per-item detail validation for newly added rows
+            'new_details.*.detail' => 'nullable|string|max:1000',
+            'new_details.*.idkode_tindakan_terapi' => 'nullable|integer',
         ]);
 
         $rekam = RekamMedis::findOrFail($id);
@@ -108,20 +115,26 @@ class Perawat extends Controller
         $rekam->temuan_klinis = $validated['temuan_klinis'] ?? $rekam->temuan_klinis;
         $rekam->diagnosa = $validated['diagnosa'] ?? $rekam->diagnosa;
         $rekam->save();
-
+        
         // Handle existing detail items (update or delete)
         $existing = $request->input('existing_details', []);
         if (is_array($existing)) {
             foreach ($existing as $iddetail => $data) {
                 // If marked for deletion
                 if (!empty($data['_delete'])) {
-                    detailRekam::where('iddetail_rekam_medis', $iddetail)->delete();
+                    detailRekam::where('iddetail_rekam_medis', $iddetail)
+                        ->where('idrekam_medis', $rekam->idrekam_medis)
+                        ->delete();
                     continue;
                 }
 
-                $detail = detailRekam::where('iddetail_rekam_medis', $iddetail)->first();
+                $detail = detailRekam::where('iddetail_rekam_medis', $iddetail)
+                    ->where('idrekam_medis', $rekam->idrekam_medis)
+                    ->first();
                 if ($detail) {
-                    $detail->detail = $data['detail'] ?? $detail->detail;
+                    if (array_key_exists('detail', $data)) {
+                        $detail->detail = $data['detail'] ?: null;
+                    }
                     if (isset($data['idkode_tindakan_terapi']) && !empty($data['idkode_tindakan_terapi'])) {
                         $detail->idkode_tindakan_terapi = $data['idkode_tindakan_terapi'];
                     }

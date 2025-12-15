@@ -8,8 +8,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <strong>Edit Rekam Medis</strong>
-                <a href="{{ route('perawat.rekam.show', $rekam->idrekam_medis) }}"
-                    class="btn btn-sm btn-secondary">Batal</a>
+                <a href="{{ route('perawat.rekam.show', $rekam->idrekam_medis) }}" class="btn btn-sm btn-secondary">Batal</a>
             </div>
             <div class="card-body">
                 <form action="{{ route('perawat.rekam.update', $rekam->idrekam_medis) }}" method="POST">
@@ -42,39 +41,48 @@
                         <label for="anamnesa" class="form-label">Anamnesa</label>
                         <textarea name="anamnesa" id="anamnesa" class="form-control" rows="3">{{ old('anamnesa', $rekam->anamnesa) }}</textarea>
                     </div>
-                    
-                    <div class="col-md-6">
-                        <label class="form-label">Detail</label>
-                        <textarea name="existing_details[{{ $d->iddetail_rekam_medis }}][detail]" class="form-control" rows="2">{{ old('existing_details.'.$d->iddetail_rekam_medis.'.detail', $d->detail) }}</textarea>
-                    </div>
-                    
+
+
                     <hr>
                     <h5>Detail Tindakan (Rinci)</h5>
 
                     {{-- Existing detail items --}}
                     <div id="existing-details" class="mb-3">
-                        @if($rekam->detailRekams && $rekam->detailRekams->isNotEmpty())
-                            @foreach($rekam->detailRekams as $d)
+                        @if ($rekam->detailRekams && $rekam->detailRekams->isNotEmpty())
+                            @foreach ($rekam->detailRekams as $d)
                                 <div class="card mb-2 p-2 existing-detail-row" data-id="{{ $d->iddetail_rekam_medis }}">
-                                    <input type="hidden" name="existing_details[{{ $d->iddetail_rekam_medis }}][id]" value="{{ $d->iddetail_rekam_medis }}">
+                                    <input type="hidden" name="existing_details[{{ $d->iddetail_rekam_medis }}][id]"
+                                        value="{{ $d->iddetail_rekam_medis }}">
                                     <div class="row">
                                         <div class="col-md-5">
                                             <label class="form-label">Kategori Tindakan</label>
-                                            <select name="existing_details[{{ $d->iddetail_rekam_medis }}][idkode_tindakan_terapi]" class="form-select">
+                                            <select
+                                                name="existing_details[{{ $d->iddetail_rekam_medis }}][idkode_tindakan_terapi]"
+                                                class="form-select">
                                                 <option value="">-- Pilih Kategori --</option>
-                                                @foreach($tindakans as $t)
-                                                    <option value="{{ $t->idkode_tindakan_terapi }}" {{ $d->idkode_tindakan_terapi == $t->idkode_tindakan_terapi ? 'selected' : '' }}>{{ $t->deskripsi_tindakan_terapi }}</option>
+                                                @foreach ($tindakans as $t)
+                                                    <option value="{{ $t->idkode_tindakan_terapi }}"
+                                                        {{ $d->idkode_tindakan_terapi == $t->idkode_tindakan_terapi ? 'selected' : '' }}>
+                                                        {{ $t->deskripsi_tindakan_terapi }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Detail</label>
+                                            <textarea name="existing_details[{{ $d->iddetail_rekam_medis }}][detail]" class="form-control" rows="3">{{ old('existing_details.' . $d->iddetail_rekam_medis . '.detail', $d->detail) }}</textarea>
+                                        </div>
                                         <div class="col-md-1 d-flex align-items-start">
                                             <div class="form-check mt-2">
-                                                <input class="form-check-input" type="checkbox" name="existing_details[{{ $d->iddetail_rekam_medis }}][_delete]" id="del_{{ $d->iddetail_rekam_medis }}" value="1">
-                                                <label class="form-check-label small text-danger" for="del_{{ $d->iddetail_rekam_medis }}">Hapus</label>
+                                                <input class="form-check-input" type="checkbox"
+                                                    name="existing_details[{{ $d->iddetail_rekam_medis }}][_delete]"
+                                                    id="del_{{ $d->iddetail_rekam_medis }}" value="1">
+                                                <label class="form-check-label small text-danger"
+                                                    for="del_{{ $d->iddetail_rekam_medis }}">Hapus</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                             @endforeach
                         @else
                             <div class="mb-2">Belum ada detail tindakan.</div>
@@ -84,7 +92,8 @@
                     {{-- Container for new detail rows added dynamically --}}
                     <div id="new-details" class="mb-3"></div>
 
-                    <button type="button" id="add-detail" class="btn btn-sm btn-outline-primary mb-3">+ Tambah Detail Baru</button>
+                    <button type="button" id="add-detail" class="btn btn-sm btn-outline-primary mb-3">+ Tambah Detail
+                        Baru</button>
 
                     <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                 </form>
@@ -93,7 +102,7 @@
     </div>
     <script>
         // Simple JS to add/remove new detail rows
-        (function(){
+        (function() {
             const addBtn = document.getElementById('add-detail');
             const newContainer = document.getElementById('new-details');
             let newIndex = 0;
@@ -107,7 +116,7 @@
                             <label class="form-label">Kategori Tindakan</label>
                             <select name="new_details[${idx}][idkode_tindakan_terapi]" class="form-select">
                                 <option value="">-- Pilih Kategori --</option>
-                                @foreach($tindakans as $t)
+                                @foreach ($tindakans as $t)
                                     <option value="{{ $t->idkode_tindakan_terapi }}">{{ addslashes($t->deskripsi_tindakan_terapi) }}</option>
                                 @endforeach
                             </select>
@@ -125,15 +134,19 @@
             }
 
             if (addBtn) {
-                addBtn.addEventListener('click', function(){
+                addBtn.addEventListener('click', function() {
                     const row = makeRow(newIndex++);
                     newContainer.appendChild(row);
-                    row.querySelector('.remove-new').addEventListener('click', function(){ row.remove(); });
+                    row.querySelector('.remove-new').addEventListener('click', function() {
+                        row.remove();
+                    });
                 });
             }
 
             // attach remove handlers for any pre-existing remove buttons (if added server-side)
-            document.querySelectorAll('.remove-new').forEach(btn => btn.addEventListener('click', function(){ btn.closest('.new-detail-row').remove(); }));
+            document.querySelectorAll('.remove-new').forEach(btn => btn.addEventListener('click', function() {
+                btn.closest('.new-detail-row').remove();
+            }));
         })();
     </script>
 @endsection
