@@ -65,10 +65,10 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="waktu_daftar" class="form-label small">Waktu Daftar</label>
-                    <input type="datetime-local" id="waktu_daftar" name="waktu_daftar"
+                    <label for="waktu_daftar" class="form-label small">Tanggal Daftar</label>
+                    <input type="date" id="waktu_daftar" name="waktu_daftar"
                         class="form-control @error('waktu_daftar') is-invalid @enderror"
-                        value="{{ old('waktu_daftar', now()->format('Y-m-d H:i')) }}" required>
+                        value="{{ old('waktu_daftar', now()->toDateString()) }}" required>
                     @error('waktu_daftar')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

@@ -64,17 +64,18 @@ class ResepsionisController extends Controller
         $validatedData = $request->validate([
             'idpet' => 'required|exists:pet,idpet',
             'idrole_user' => 'required|exists:role_user,idrole_user',
-            'waktu_daftar' => 'required|date_format:Y-m-d\TH:i',
+            // Date-only from form; time will be current server time
+            'waktu_daftar' => 'required|date_format:Y-m-d',
         ]);
 
-        // Convert datetime-local format (Y-m-d\TH:i) to Y-m-d H:i
-        $waktuDaftar = str_replace('T', ' ', $validatedData['waktu_daftar']);
-
-        // Get the date part only
-        $date = substr($waktuDaftar, 0, 10);
+        // Compose full datetime using selected date + current server time
+        $dateOnly = $validatedData['waktu_daftar']; // Y-m-d
+        $currentTime = now()->format('H:i:s');
+        $waktuDaftarCarbon = Carbon::parse($dateOnly . ' ' . $currentTime);
+        $date = $waktuDaftarCarbon->toDateString();
 
         // Count how many reservations exist for this date
-        $countForDay = Temu_dokter::whereRaw("DATE(waktu_daftar) = ?", [$date])->count();
+        $countForDay = Temu_dokter::whereDate('waktu_daftar', $date)->count();
 
         // Next no_urut is count + 1
         $no_urut = $countForDay + 1;
@@ -83,13 +84,13 @@ class ResepsionisController extends Controller
         $temu = Temu_dokter::create([
             'idpet' => $validatedData['idpet'],
             'idrole_user' => $validatedData['idrole_user'],
-            'waktu_daftar' => $waktuDaftar,
+            'waktu_daftar' => $waktuDaftarCarbon->toDateTimeString(),
             'no_urut' => $no_urut,
             'status' => 'P',
         ]);
 
         // Format nomor urut: YYYYMMDD-{no_urut}
-        $nomorUrut = Carbon::parse($waktuDaftar)->format('Ymd') . '-' . $no_urut;
+        $nomorUrut = $waktuDaftarCarbon->format('Ymd') . '-' . $no_urut;
 
         return redirect()->route('resepsionis.temu.success', ['id' => $temu->idreservasi_dokter])->with('nomorUrut', $nomorUrut);
     }
